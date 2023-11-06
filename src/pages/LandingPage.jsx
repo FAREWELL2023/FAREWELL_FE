@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 import logo_2023 from '../images/logo_2023.svg';
 import logo from '../images/logo.svg';
-import calendar from '../images/3dicon/IMG_7941.jpg'; 
+import calendar from '../images/3dicon/calendar.jpg'; 
 import santa from '../images/3dicon/santa.jpg';
 import bell from '../images/3dicon/bell.jpg';
 import tree from '../images/3dicon/tree.jpg';
 
 const Wrapper = styled.div`
-    background-color: black;
+    background-color: #262626;
     width: 100vw;
     align-items: center;
     text-align: center;
@@ -57,6 +57,7 @@ const Letsgo = styled.div`
     font-size: 0.8rem;
     font-weight: 700;
     margin-bottom: 20px;
+    padding-top: 50px;
 `
 
 const LandingPage = () => {
@@ -84,12 +85,12 @@ const LandingPage = () => {
                             나의 회고록을 열 수 있는 열쇠를 얻어보세요!<br/>
                             열쇠를 얻으면 회고록을 SNS에 공유할 수 있습니다.</SubTxt>
                 </div>
-                <img src={santa} style={{width: "170px"}}/>
+                <img src={santa} style={{width: "160px"}}/>
                 </div>
             </TxtBlock>
             <TxtBlock style={{display: "flex"}}>
                 <div style={{marginRight: "auto", marginLeft: "-20px", display: "flex"}}>
-                <img src={bell} style={{width: "160px"}}/>
+                <img src={bell} style={{width: "150px"}}/>
                 <div style={{textAlign: "left", marginTop: "40px", paddingLeft: "15px"}}>
                     <ServiceTitle>남이 써주는 나의 2023 회고록</ServiceTitle>
                     <SubTxt>남이 써주는 회고록을 생성하고 링크를 공유하면<br/>
@@ -110,7 +111,7 @@ const LandingPage = () => {
                             메시지의 공개범위는<br/>
                             ‘전체공개/상대에게만 공개’ 중 선택할 수 있습니다.</SubTxt>
                 </div>
-                <img src={tree} style={{width: "130px"}}/>
+                <img src={tree} style={{width: "120px"}}/>
                 </div>
             </TxtBlock>
             <Letsgo>그럼, 바로 나만의 회고록을 만들러 가볼까요?</Letsgo>
