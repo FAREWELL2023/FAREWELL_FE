@@ -115,7 +115,7 @@ const LandingPage = () => {
             </TxtBlock>
             <Letsgo>그럼, 바로 나만의 회고록을 만들러 가볼까요?</Letsgo>
             <Button title='시작하기' onClick={() => {
-                navigate('/'); // 회원가입/로그인페이지로 이동
+                navigate('/first'); // 회원가입/로그인페이지로 이동
             }}/>
         </Wrapper>
     );
