@@ -2,6 +2,7 @@ import './App.css';
 import { Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import FirstPage from "./pages/FirstPage";
+import MyList from './pages/MyList';
 import { createGlobalStyle } from "styled-components";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
     <Routes>
       <Route path='/' element={<LandingPage />}/>
       <Route path='/first' element={<FirstPage />}/>
+      <Route path='/mylist' element={<MyList/>}/>
     </Routes>
     </>
   );
