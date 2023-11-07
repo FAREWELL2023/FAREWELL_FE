@@ -87,10 +87,10 @@ const FirstPage = () => {
                 전할 수도 있습니다.<br/> </SubTxt>
             </TxtBox>
                 <LoginButton onClick={() => {
-                    navigate('/'); // 로그인페이지로
+                    navigate('/accounts/auth'); // 로그인페이지로
                 }} style={{marginTop: "5vh"}}>로그인</LoginButton>
                 <SignButton onClick={() => {
-                    navigate('/'); // 회원가입페이지로
+                    navigate('/accounts/register'); // 회원가입페이지로
                 }}>회원가입</SignButton>
         </Wrapper>
     );
