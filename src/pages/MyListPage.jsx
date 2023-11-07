@@ -23,9 +23,9 @@ const List = styled.div`
 `
 
 let question = [
-    {number: 1, question: "1번질문", isanswer: true},
-    {number: 2, question: "2번질문", isanswer: true},
-    {number: 3, question: "3번질문", isanswer: false},
+    {number: 1, question: "1번질문", isanswer: true, answer: '1번답변'},
+    {number: 2, question: "2번질문", isanswer: true, answer: '2번답변'},
+    {number: 3, question: "3번질문", isanswer: false, answer: ''},
     {number: 4, question: "4번질문", isanswer: false},
     {number: 5, question: "5번질문", isanswer: false},
     {number: 6, question: "6번질문", isanswer: false},
@@ -35,6 +35,7 @@ let question = [
 const MyListPage = () => {
     const navigate = useNavigate();
     const questions = useState([]);
+    console.log(question[0].answer);
 
     return (
         <Wrapper>
@@ -42,7 +43,7 @@ const MyListPage = () => {
             <Title>사용자님의 2023 회고록</Title>
             <List>
             {question.map(list => (
-                <MyQList key={list.id} number={list.number} question={list.question} isanswer={list.isanswer}/>
+                <MyQList key={list.id} number={list.number} question={list.question} isanswer={list.isanswer} answer={list.answer}/>
             ))}
             </List>
         </Wrapper>
