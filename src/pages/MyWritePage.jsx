@@ -72,8 +72,8 @@ const StyledButton = styled.div`
 const MyWritePage = () => {
     const location = useLocation();
     const QInfo = { ...location.state }; // 해당 질문의 번호,질문내용을 받아옴
-    const navigate = useNavigate();
-    const [answer, setAnswer] = useState("");
+    const navigate = useNavigate(); console.log(QInfo);
+    const [answer, setAnswer] = useState(QInfo.answer);
 
     const onChangeAnswer = (e) => {
         const answer = e.target.value;
@@ -97,7 +97,9 @@ const MyWritePage = () => {
                         placeholder="답변을 작성해주세요."
                     /></Answer>
             <StyledButton>
-                <CheckButton/>
+                <CheckButton onClick={() => {
+                    navigate('/mylist');
+                }}/>
             </StyledButton>
         </Wrapper>
     );
