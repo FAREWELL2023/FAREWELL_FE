@@ -14,7 +14,6 @@ const Wrapper = styled.div`
     overflow-x: hidden;
     padding-bottom: 200px;
 `
-
 const Logo = styled.div`
     margin-top: -15px;
 `
@@ -88,6 +87,7 @@ function RegisterPage(props){
     const [emailMessage, setEmailMessage]=useState('');
     const [passwordMessage, setPasswordMessage]=useState('');
     const [confirmPwdMessage, setConfirmPwdMessage]=useState('');
+
 
     /* 유효성 검사 위한 세팅 */
     const [isName, setIsName]=useState(false);
