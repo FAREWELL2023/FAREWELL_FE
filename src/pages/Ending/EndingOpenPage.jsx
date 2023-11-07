@@ -40,7 +40,7 @@ const EndingPage = () => {
             <div style={{margin: "auto"}}>
             <Title>사용자님의 2023년 열기</Title>
             <img src={keyhold} onClick={() => {
-            navigate('/')
+            navigate('/endingrate');
         }}/>
             <Txt>열쇠구멍을 터치해주세요.</Txt>
             </div>

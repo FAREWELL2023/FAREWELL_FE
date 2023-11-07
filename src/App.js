@@ -9,6 +9,8 @@ import { createGlobalStyle } from "styled-components";
 import MyWritePage from './pages/MyWritePage';
 import MyViewPage from "./pages/MyViewPage";
 import EndingOpenPage from "./pages/Ending/EndingOpenPage";
+import AnswerRatePage from "./pages/Ending/AnswerRatePage";
+import MyEndingPage from "./pages/Ending/MyEndingPage";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
       <Route path="/accounts/register" element={<RegisterPage />} />
       <Route path="/accounts/auth" element={<LoginPage />} />
       <Route path="/endingopen" element={<EndingOpenPage/>} />
+      <Route path="/endingrate" element={<AnswerRatePage/>}/>
+      <Route path="/myending" element={<MyEndingPage/>}/>
      </Routes>
     </>
   );
