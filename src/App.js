@@ -2,8 +2,9 @@ import './App.css';
 import { Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import FirstPage from "./pages/FirstPage";
-import MyList from './pages/MyList';
+import MyListPage from './pages/MyListPage';
 import { createGlobalStyle } from "styled-components";
+import MyWritePage from './pages/MyWritePage';
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
     <Routes>
       <Route path='/' element={<LandingPage />}/>
       <Route path='/first' element={<FirstPage />}/>
-      <Route path='/mylist' element={<MyList/>}/>
+      <Route path='/mylist' element={<MyListPage/>}/>
+      <Route path='/mywrite/:id' element={<MyWritePage/>}/>
     </Routes>
     </>
   );

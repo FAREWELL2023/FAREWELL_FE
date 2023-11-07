@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const List = styled.div`
@@ -33,8 +34,12 @@ const Line = styled.div`
 
 const MyQList = (props) => {
     const { number, question, isanswer, onClick } = props;
+    const navigate = useNavigate();
+
     return (
-        <List onClick={onClick}>
+        <List onClick={() => {
+            isanswer? navigate('/') : navigate(`/mywrite/${number}`, {state :{number: number, question: question}}) // 답변이 있으면 /write으로, 없으면 /으로
+        }}>
             {number > 1 && <Line style={isanswer? {borderLeft: "medium solid white"} : {}}/>}
             <div style={{display:"flex", justifyContent:"space-between"}}>
             <NumberCircle style={isanswer? {backgroundColor: "white"} : {}}>{number || 1}</NumberCircle>
