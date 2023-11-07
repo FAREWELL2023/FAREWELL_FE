@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import logo from '../images/key_logo.svg';
 import { useLocation, useNavigate } from 'react-router-dom';
+import CheckButton from '../components/CheckButton';
 
 const Wrapper = styled.div`
     background-color: #262626;
@@ -59,6 +60,9 @@ const Answer = styled.div`
         outline: none;
     }
 `
+const StyledButton = styled.div`
+
+`
 
 
 const MyWritePage = () => {
@@ -88,6 +92,9 @@ const MyWritePage = () => {
                         onChange={onChangeAnswer}
                         placeholder="답변을 작성해주세요."
                     /></Answer>
+            <StyledButton>
+                <CheckButton/>
+            </StyledButton>
         </Wrapper>
     );
 };
