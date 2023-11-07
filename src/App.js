@@ -17,8 +17,8 @@ function App() {
       <Route path='/first' element={<FirstPage />}/>
       <Route path='/mylist' element={<MyListPage/>}/>
       <Route path='/mywrite/:id' element={<MyWritePage/>}/>
-        <Route path="/accounts/register" element={<RegisterPage />} />
-        <Route path="/accounts/auth" element={<LoginPage />} />
+      <Route path="/accounts/register" element={<RegisterPage />} />
+      <Route path="/accounts/auth" element={<LoginPage />} />
      </Routes>
     </>
   );

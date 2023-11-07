@@ -6,16 +6,20 @@ import { useNavigate } from 'react-router-dom';
 
 const Wrapper = styled.div`
     background-color: #262626;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     overflow-x: hidden;
-    padding: 5vh 7vw 0 7vw;
+    //padding: 5vh 7vw 0 7vw;
 `
 const Title = styled.div`
     color: #FFF;
     font-weight: 700;
     margin: 1vh 0 3vh 0;
     font-size: 1.2rem;
+    padding-left: 7vw;
+`
+const List = styled.div`
+    padding: 0 7vw 0 7vw;
 `
 
 let question = [
@@ -34,11 +38,13 @@ const MyListPage = () => {
 
     return (
         <Wrapper>
-            <img src={logo}/>
+            <img src={logo} style={{padding: "5vh 0 0 7vw"}}/>
             <Title>사용자님의 2023 회고록</Title>
+            <List>
             {question.map(list => (
                 <MyQList key={list.id} number={list.number} question={list.question} isanswer={list.isanswer}/>
             ))}
+            </List>
         </Wrapper>
     );
 };

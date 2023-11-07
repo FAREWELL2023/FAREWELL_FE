@@ -18,7 +18,7 @@ const NumberCircle = styled.div`
 const Question = styled.div`
     border-radius: 7vh;
     background: #969696;
-    width: 80vw;
+    width: 70vw;
     height: 7vh;
     color: #262626;
     font-weight: 500;

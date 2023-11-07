@@ -9,7 +9,7 @@ const Wrapper = styled.div`
     width: 100%;
     height: 100vh;
     overflow-x: hidden;
-    padding: 5vh 7vw 0 7vw;
+    //padding: 5vh 7vw 0 7vw;
     text-align: center;
     align-items: center;
 `
@@ -19,6 +19,7 @@ const Title = styled.div`
     margin: 1vh 0 3vh 0;
     font-size: 1.2rem;
     display: flex;
+    padding-left: 7vw;
 `
 const Number = styled.div`
     color: #FFF;
@@ -42,10 +43,11 @@ const Answer = styled.div`
     border-radius: 38px;
     background: #FFF;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
-    padding: 25px;
+    padding: 20px 0 20px 0;
+    margin: 0 7vw;
     >textarea {
         border : 0px solid;
-        width : 90vw;
+        width: 70vw;
         height : 50vh;
         font-size: 2vh;
         word-break:break-all;
@@ -63,6 +65,7 @@ const Answer = styled.div`
 const StyledButton = styled.div`
     display: flex;
     margin-top: -20px;
+    padding-right: 7vw;
 `
 
 
@@ -79,7 +82,7 @@ const MyWritePage = () => {
 
     return (
         <Wrapper>
-            <img src={logo} style={{display:"flex"}}/>
+            <img src={logo} style={{display:"flex", padding: "5vh 0 0 7vw"}}/>
             <Title>사용자님의 2023 회고록</Title>
             <Number>{QInfo.number}</Number>
             <Question>{QInfo.question}</Question>
