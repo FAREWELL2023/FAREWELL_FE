@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Wrapper = styled.div`
     background-color: #262626;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     overflow-x: hidden;
     padding: 5vh 7vw 0 7vw;
