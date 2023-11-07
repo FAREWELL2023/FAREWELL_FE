@@ -89,7 +89,6 @@ function RegisterPage(props){
     const [passwordMessage, setPasswordMessage]=useState('');
     const [confirmPwdMessage, setConfirmPwdMessage]=useState('');
 
-
     /* 유효성 검사 위한 세팅 */
     const [isName, setIsName]=useState(false);
     const [isEmail, setIsEmail]=useState(false);
