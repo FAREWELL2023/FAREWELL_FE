@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import keyhold from '../../images/keyhold.svg';
 import { useNavigate } from 'react-router-dom';
+//import Modal from 'react-modal';
+import Modal from '../../components/Modal';
 
 const Wrapper = styled.div`
     width: 100vw;
@@ -28,15 +30,19 @@ const Txt = styled.div`
 
 const EndingPage = () => {
     const navigate = useNavigate();
+    const customStyles = {
+        overlay: {zIndex: 1000}
+      };
 
     return (
-        <Wrapper onClick={() => {
-            navigate('/')
-        }}>
+        <Wrapper>
+            <Modal/>
             <div style={{margin: "auto"}}>
             <Title>사용자님의 2023년 열기</Title>
-            <img src={keyhold}/>
-            <Txt>화면을 터치해주세요.</Txt>
+            <img src={keyhold} onClick={() => {
+            navigate('/')
+        }}/>
+            <Txt>열쇠구멍을 터치해주세요.</Txt>
             </div>
         </Wrapper>
     );
