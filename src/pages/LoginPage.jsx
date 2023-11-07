@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-/* import axios from 'axios'; */
+import axios from 'axios';
 import styled from "styled-components";
 
 import bell from '../images/3dicon/jinglebells.png'
@@ -16,7 +16,6 @@ const Wrapper = styled.div`
     overflow-x: hidden;
     padding-bottom: 200px;
 `
-
 const Logo = styled.div`
     margin-top: -15px;
 `
@@ -40,17 +39,13 @@ const ErrorMessage = styled.span`
     color:red;
     font-size:13px;
 `
-
 const LoginBlock = styled.div`
     padding: 5vh 0;
 `;
 
 const SubmitButton=styled.button`
-    padding-top: 27vh;
-    border:none;
-    background: transparent;
+    padding-top: 100vh;
 `
-
 function LoginPage(props){
     /* 상태 관리 초기값 세팅 */
     const [email,setEmail]=useState('');
@@ -81,7 +76,7 @@ function LoginPage(props){
         setPassword(event.currentTarget.value);
     }
 
-/*     const onClickLogin = () =>{
+    const onClickLogin = () =>{
         console.log('Login');
         console.log("email: ",email);
         console.log("password: ",password);
@@ -106,19 +101,19 @@ function LoginPage(props){
                 sessionStorage.setItem('email', email)
             }
             //작업 완료 시 페이지 이동 
-            document.location.href='/'
+            /* document.location.href='/' */
         })
         .catch()
     }
 
-    //페이지 렌더링 후 가장 처음 호출되는 함수
+/*     //페이지 렌더링 후 가장 처음 호출되는 함수
     useEffect(()=>{
         axios.get('/accounts/auth')
         .then(res=>console.log(res))
         .catch()
     },
     //페이지 호출 후 처음 한번만 호출되도록 [] 추가
-    []) */
+    []) */ 
 
     return(
         <Wrapper>
@@ -150,7 +145,7 @@ function LoginPage(props){
                 {emailMessage}
                 </ErrorMessage>
                 </LoginBlock>
-                <SubmitButton /* onClick={onClickLogin} */ style={{padding:"1vh 65vw", border:"none", background: "transparent"}}>
+                <SubmitButton onClick={onClickLogin} style={{padding:"29vh 65vw", border:"none", background: "transparent"}}>
                         <img src={checkbutton}/>
                 </SubmitButton>
             </div>
