@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import { createGlobalStyle } from "styled-components";
 import MyWritePage from './pages/MyWritePage';
 import MyViewPage from "./pages/MyViewPage";
+import EndingOpenPage from "./pages/Ending/EndingOpenPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path='/myview/:id' element={<MyViewPage/>}/>
       <Route path="/accounts/register" element={<RegisterPage />} />
       <Route path="/accounts/auth" element={<LoginPage />} />
+      <Route path="/endingopen" element={<EndingOpenPage/>} />
      </Routes>
     </>
   );
