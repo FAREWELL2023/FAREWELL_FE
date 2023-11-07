@@ -16,19 +16,27 @@ const Wrapper = styled.div`
     padding-bottom: 0px;
     position:relative;
 `
+const Theme=styled.div`
+    position:absolute;
+    color:#FFFFFF;
+    font-size:20px;
+    font-weight:bold;
+    left: 165px;
+    top: 90px;
+`
 const Title=styled.div`
     position:absolute;
     color:#FFFFFF;
     font-size:24px;
     font-weight:bold;
-    left: 25vw;
-    top: 190px;
+    left: 15vw;
+    top: 150px;
 `
 const ContentBox=styled.div`
     position: relative;
     width: 100vw;
     height: 614px;
-    top: -1vh;
+    top: -1.5vh;
     border-radius: 42.87px 42.87px 0px 0px ;
     background-color: #EFEC69;
 /*     align-items:center;
@@ -45,50 +53,50 @@ const SelectBox=styled.div`
     margin-bottom: 3vh;
     margin-left: 9vw;
     box shadow: 20px 20px grey;
-/*     box-shadow: 20px grey;
-    spread-radius: 5px; */
 `
 const BoxIcon=styled.img`
     width:65px;
     height:65px;
-    padding-top: 3vh;
-    margin-left:40px;
+    padding-top: 3.25vh;
+    margin-left:35px;
 `
-
 const Content=styled.div`
     padding-top: 3vh;
     margin-left:15px;
 `
-
 const ContentTitle = styled.div`
     color: #000000;
     font-size: 1rem;
     font-weight:700;
     margin-top: 10px;
+    margin-left: -10px;
 `
 const ContentTxt = styled.div`
     color: #000000;
     font-size: 0.8rem;
     margin-top: 10px;
+    margin-left: -10px;
 `
 
-const CompleteQ = () => {
+const CompleteQPage= () => {
     const navigate = useNavigate();
     return (
         <div>
             <Wrapper>
-            <img src={img_group} style={{ width:"440px", height:"300px", margin:"15px -15px 0px"}}/>
-            <Title></Title>
+            <img src={img_group} style={{ width:"440px", height:"300px", margin:"10px -15px 0px"}}/>
+            <Theme>테마명</Theme>
+            <Title>준비된 질문에 모두 답했어요!</Title>
             <ContentBox>
                 <br/>
             <SelectBox>
-                <BoxIcon src={question} style={{width:"89px", height:"75px", margin:"0px 30px"}}/>
-                
+                <BoxIcon src={question} style={{width:"89px", height:"75px", margin:"0px -15px 0px 20px"}}/>                
                 <Content>
                 <ContentTitle onClick={() => {
                 navigate('/'); // 추가 질문 페이지로 이동
-            }}></ContentTitle>
-                <ContentTxt></ContentTxt>
+            }}>
+                추가 질문 답변하기
+            </ContentTitle>
+                <ContentTxt>문답이 끝나 아쉬우신가요? <br/> 준비된 추가 질문에 답해보세요!</ContentTxt>
                 </Content>             
             </SelectBox>
             <SelectBox>
@@ -96,8 +104,8 @@ const CompleteQ = () => {
                 <Content onClick={() => {
                 navigate('/'); // 남의 회고록 페이지로 이동
             }}>
-                <ContentTitle></ContentTitle>
-                <ContentTxt></ContentTxt>
+                <ContentTitle>남이 쓰는 나의 2023</ContentTitle>
+                <ContentTxt>타인이 쓰는 나의 회고록 알아보기</ContentTxt>
                 </Content>
             </SelectBox>
             </ContentBox> 
@@ -107,4 +115,4 @@ const CompleteQ = () => {
     );
 };
 
-export default CompleteQ;
+export default CompleteQPage;

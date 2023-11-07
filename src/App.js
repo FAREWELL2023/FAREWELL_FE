@@ -9,7 +9,7 @@ import UserPage from "./pages/UserPage";
 import { createGlobalStyle } from "styled-components";
 import MyWritePage from "./pages/MyWritePage";
 import MyViewPage from "./pages/MyViewPage";
-import CompleteQ from "./pages/CompleteQ";
+import CompleteQPage from "./pages/CompleteQPage";
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
         <Route path="/accounts/register" element={<RegisterPage />} />
         <Route path="/accounts/auth" element={<LoginPage />} />
         <Route path="/user" element={<UserPage />} />
-        <Route path="/complete" element={<CompleteQ />} />
+        <Route path="/complete" element={<CompleteQPage />} />
       </Routes>
     </>
   );
