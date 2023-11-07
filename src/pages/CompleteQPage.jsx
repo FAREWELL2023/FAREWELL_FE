@@ -7,14 +7,12 @@ import question from '../images/3dicon/question.png';
 import comments from '../images/3dicon/comments.png';
 
 const Wrapper = styled.div`
-    background-color: #262626;
     width: 100vw;
     height: 100vh;
+    overflow-x: hidden;
+    background-color: #262626;;
     align-items: center;
     text-align: center;
-    overflow-x: hidden;
-    padding-bottom: 0px;
-    position:relative;
 `
 const Theme=styled.div`
     position:absolute;
@@ -35,8 +33,8 @@ const Title=styled.div`
 const ContentBox=styled.div`
     position: relative;
     width: 100vw;
-    height: 614px;
-    top: -1.5vh;
+    height: 569px;
+    top: 0vh;
     border-radius: 42.87px 42.87px 0px 0px ;
     background-color: #EFEC69;
 /*     align-items:center;

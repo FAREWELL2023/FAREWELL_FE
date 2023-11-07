@@ -47,8 +47,8 @@ const Keyword2=styled.div`
 const ContentBox=styled.div`
     position: relative;
     width: 100vw;
-    height: 614px;
-    top: 5vh;
+    height: 566.5px;
+    top: 6vh;
     border-radius: 42.87px 42.87px 0px 0px ;
     background-color: #EFEC69;
 /*     align-items:center;
