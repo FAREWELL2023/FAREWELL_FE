@@ -1,0 +1,16 @@
+.modal-wrapper .content{
+    padding: 20px 10px;
+    text-align: center;
+    color: #FFF;
+    margin-top: -5vh;
+    z-index: -1;
+}
+.modal-wrapper .close-btn{
+    height: 40px;
+    padding: 10px 40px;
+    margin: 30px auto 0;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    display: block;
+}
