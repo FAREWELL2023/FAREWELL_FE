@@ -7,6 +7,7 @@ import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import { createGlobalStyle } from "styled-components";
 import MyWritePage from './pages/MyWritePage';
+import MyViewPage from "./pages/MyViewPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path='/first' element={<FirstPage />}/>
       <Route path='/mylist' element={<MyListPage/>}/>
       <Route path='/mywrite/:id' element={<MyWritePage/>}/>
+      <Route path='/myview/:id' element={<MyViewPage/>}/>
       <Route path="/accounts/register" element={<RegisterPage />} />
       <Route path="/accounts/auth" element={<LoginPage />} />
      </Routes>

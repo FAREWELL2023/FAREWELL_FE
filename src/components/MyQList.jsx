@@ -38,7 +38,7 @@ const MyQList = (props) => {
 
     return (
         <List onClick={() => {
-            isanswer? navigate('/') : navigate(`/mywrite/${number}`, {state :{number: number, question: question}}) // 답변이 있으면 /write으로, 없으면 /으로
+            isanswer? navigate(`/myview/${number}`, {state :{number: number, question: question}}) : navigate(`/mywrite/${number}`, {state :{number: number, question: question}}) // 답변이 있으면 /write으로, 없으면 /으로
         }}>
             {number > 1 && <Line style={isanswer? {borderLeft: "medium solid white"} : {}}/>}
             <div style={{display:"flex", justifyContent:"space-between"}}>
