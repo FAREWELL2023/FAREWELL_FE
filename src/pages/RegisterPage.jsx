@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 import bell from '../images/3dicon/jinglebells.png'
 import logo_2023_black from '../images/logo_2023_black.svg'
@@ -47,7 +48,7 @@ const KeywordButtonContainer = styled.div`
   padding-right: 45px;
 `;
 
-const KeywordButton = styled.button`
+const KeywordButton = styled.div`
     height:30px;
     width:95px;
     margin-right:5px;
@@ -63,14 +64,14 @@ const KeywordButton = styled.button`
 function RegisterPage(props){
 
     /* 상태 관리 초기값 세팅 */
-    const [name,setName]=useState('');
+    const [username,setUserName]=useState('');
     const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');
-    const [confirmPwd,setConfirmPwd]=useState('');
-    const [selectedKeywords, setSelectedKeywords] = useState([]); 
+    const [password2,setPassword2]=useState('');
+    const [keywords, setKeywords] = useState([]); 
     const navigate = useNavigate();
 
-    const keywords = [
+    const keywordlist = [
                 "즐거운",
                 "행복한",
                 "설레는",
@@ -99,7 +100,7 @@ function RegisterPage(props){
 
     const onChangeName = (event) => {
         const currentName = event.target.value;
-        setName(currentName);
+        setUserName(currentName);
      
         if (currentName.length < 2 || currentName.length > 5) {
           setNameMessage("닉네임은 2글자 이상 5글자 이하로 입력해주세요!");
@@ -141,9 +142,9 @@ function RegisterPage(props){
         } 
     }
 
-    const onChangeConfirmPwd = (event) => {
+    const onChangePassword2 = (event) => {
         const currentPasswordConfirm = event.target.value;
-        setConfirmPwd(currentPasswordConfirm);
+        setPassword2(currentPasswordConfirm);
         if (password !== currentPasswordConfirm) {
             setConfirmPwdMessage("비밀번호와 비밀번호 확인이 같지 않습니다");
             setIsConfirmPwd(false);
@@ -156,43 +157,59 @@ function RegisterPage(props){
     const onSubmit = (event) => {
         event.preventDefault();
 
-        if(!(isName&&isEmail&&isConfirmPwd&&isPassword)){
+        if (!(isName&&isEmail&&isConfirmPwd&&isPassword)){
             return alert('입력 정보를 확인해 주세요.')
+        } else if (!(keywords.length==2)){
+            return alert('키워드를 2개 선택해 주세요.')
         }
 
-        console.log('Name: ', name);
+/*      console.log('Name: ', username);
         console.log('Email: ', email);
         console.log('password: ', password);
-        console.log('keyword', selectedKeywords);
+        console.log('keyword', keywords); */
 
-        let body={
-            name: name,
+        let UserInfo={
+            name: username,
             email: email,
             password: password,
-            keyword: selectedKeywords
-        }        
+            keyword: keywords
+        }       
+
+        console.log(UserInfo);
+        
+        axios.post("/accounts/register",UserInfo
+        ).then((response)=>{
+              alert("회원가입 성공!");
+              navigate("./auth");
+          })
+          .catch((err)=>{
+            if(!err.response){
+              console.log(err);
+            }
+            else{
+              console.log(err);
+              console.log(err.response.data);
+              navigate("./auth"); // **일단 화면 넘어가기 위해서 추가해둠**
+            }
+        });
     }
 
     const handleKeywordToggle = (keyword) => {
-        if (selectedKeywords.includes(keyword)) {
-          setSelectedKeywords(
-            selectedKeywords.filter((item) => item !== keyword)
+        if (keywords.includes(keyword)) {
+          setKeywords(
+            keywords.filter((item) => item !== keyword)
           );
         } else {
-          if (selectedKeywords.length < 2) {
-            setSelectedKeywords([...selectedKeywords, keyword]);
+          if (keywords.length < 2) {
+            setKeywords([...keywords, keyword]);
           }
         }
       };
 
-      const onClick=()=>{
-        navigate(`/user`);
-    }
-
     return(
         <Wrapper>
         <div>
-            <form onSubmit={onSubmit}>
+            <form>
             <img src={bell}/>
             <br/>
             <img src={logo_2023_black}/>
@@ -201,9 +218,9 @@ function RegisterPage(props){
             <Txt>회고록 생성하기</Txt>
             <div>
                 <SignInput 
-                    id="name"
-                    name="name"
-                    value={name}
+                    id="username"
+                    name="username"
+                    value={username}
                     onChange={onChangeName}
                     type="text"
                     placeholder="   이름"   
@@ -224,10 +241,10 @@ function RegisterPage(props){
                     placeholder="   비밀번호"
                 />
                 <SignInput 
-                    id="confirmPwd"
-                    name="confirmPwd"
-                    value={confirmPwd}
-                    onChange={onChangeConfirmPwd}                 
+                    id="password2"
+                    name="password2"
+                    value={password2}
+                    onChange={onChangePassword2}                 
                     placeholder="   비밀번호 확인"
                 />
                 <br/>
@@ -239,17 +256,17 @@ function RegisterPage(props){
                 </ErrorMessage>            
                 <Txt>나의 2023 키워드</Txt>
                 <KeywordButtonContainer>
-                {keywords.map((item) => (
+                {keywordlist.map((item) => (
                 <KeywordButton
                     key={item}
-                    selected={selectedKeywords.includes(item)}
+                    selected={keywords.includes(item)}
                     onClick={() => handleKeywordToggle(item)}
                 >
                     {item}
                 </KeywordButton>
                 ))}
             </KeywordButtonContainer>
-            <button formAction="" onClick={onClick} style={{padding:"1vh 65vw", border:"none", background: "transparent"}}>
+            <button formAction="" onClick={onSubmit} style={{padding:"1vh 65vw", border:"none", background: "transparent"}}>
                 <img src={checkbutton}/>
             </button> 
             </div>
