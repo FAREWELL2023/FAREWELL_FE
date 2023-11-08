@@ -58,7 +58,7 @@ const ThemePage = () => {
     // 공개 여부 설정 로직
     const determinePublicationStatus = () => {
       const currentDate = new Date();
-      const publishDate1 = new Date('2023-12-01');
+      const publishDate1 = new Date('2023-10-01'); //연결 확인 위해 임시로 바꿔둠!
       const publishDate2 = new Date('2023-12-08');
       const publishDate3 = new Date('2023-12-15');
       const publishDate4 = new Date('2023-12-22');
@@ -88,7 +88,7 @@ const ThemePage = () => {
                 {isPublished1?(
                     <div>
                         <ContentBox onClick={() => {
-                            navigate('/'); // 질문 페이지로
+                            navigate('/mylist'); // 질문 페이지로
                         }}>
                             <ContentLogo src={rainbow} style={{width:"45px", height: "59px", padding: "0px 0px 0px 15vw"}}/>
                                 <ContentTxt style={{ padding: "0px 16px"}}>따뜻했던 2023</ContentTxt>

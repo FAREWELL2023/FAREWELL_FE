@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from 'react-router-dom';
 
 import bell from '../images/3dicon/jinglebells.png'
 import logo_2023_black from '../images/logo_2023_black.svg'
@@ -67,6 +68,7 @@ function RegisterPage(props){
     const [password,setPassword]=useState('');
     const [confirmPwd,setConfirmPwd]=useState('');
     const [selectedKeywords, setSelectedKeywords] = useState([]); 
+    const navigate = useNavigate();
 
     const keywords = [
                 "즐거운",
@@ -183,6 +185,10 @@ function RegisterPage(props){
         }
       };
 
+      const onClick=()=>{
+        navigate(`/user`);
+    }
+
     return(
         <Wrapper>
         <div>
@@ -243,7 +249,7 @@ function RegisterPage(props){
                 </KeywordButton>
                 ))}
             </KeywordButtonContainer>
-            <button formAction="" style={{padding:"1vh 65vw", border:"none", background: "transparent"}}>
+            <button formAction="" onClick={onClick} style={{padding:"1vh 65vw", border:"none", background: "transparent"}}>
                 <img src={checkbutton}/>
             </button> 
             </div>

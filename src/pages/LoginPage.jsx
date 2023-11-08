@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import styled from "styled-components";
+import { useNavigate } from 'react-router-dom';
 
 import bell from '../images/3dicon/jinglebells.png'
 import logo_2023_black from '../images/logo_2023_black.svg'
@@ -53,6 +54,7 @@ function LoginPage(props){
 
     const [emailMessage, setEmailMessage]=useState('');
     const [isEmail, setIsEmail]=useState(false);
+    const navigate = useNavigate();
 
     /* 로딩 메시지 */
     const [loading, setLoading] = useState(false);
@@ -100,8 +102,7 @@ function LoginPage(props){
                 console.log('=================', '로그인 성공')
                 sessionStorage.setItem('email', email)
             }
-            //작업 완료 시 페이지 이동 
-            /* document.location.href='/' */
+                navigate(`/user`);
         })
         .catch()
     }

@@ -167,6 +167,17 @@ const FeedPage = () => {
                     <Answer>{feed.answer}</Answer>
                 </QuestionList>
             ))}
+
+{/*             추후 삭제 예정 */}
+            <QuestionList>
+                    <Menu src={menu} onClick={() => toggleSubMenu(1)} />
+                    <SubMenu visible={subMenuVisibility[1]}>
+                        <SubMenuItem /* onClick={deleteFeed} */>삭제하기</SubMenuItem>
+                        <SubMenuItem>나만보기</SubMenuItem>
+                    </SubMenu>
+                    <Question>임시로 추가</Question>
+                    <Answer>연결 확인하려구요...</Answer>
+                </QuestionList>
             <SubmitButton onClick={onClickWrite}>
                 <img src={write} style={{ width: "28vw", height: "10vh" }} />
             </SubmitButton>
