@@ -11,6 +11,7 @@ import MyWritePage from "./pages/MyWritePage";
 import MyViewPage from "./pages/MyViewPage";
 import CompleteQPage from "./pages/CompleteQPage";
 import ThemePage from "./pages/ThemePage";
+import OthersQuestionPage from "./pages/OthersQuestionPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/user" element={<UserPage />} />
         <Route path="/complete" element={<CompleteQPage />} />
         <Route path="/list" element={<ThemePage />} />
+        <Route path="/myfeed/questions" element={<OthersQuestionPage />} />
       </Routes>
     </>
   );
