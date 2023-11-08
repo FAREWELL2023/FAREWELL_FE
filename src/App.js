@@ -15,6 +15,9 @@ import MyEndingPage from "./pages/Ending/MyEndingPage";
 import CompleteQPage from "./pages/CompleteQPage";
 import ThemePage from "./pages/ThemePage";
 import ThxPage from "./pages/Ending/ThxPage";
+import OthersQuestionPage from "./pages/OthersQuestionPage";
+import OthersWritePage from "./pages/OthersWritePage";
+import FeedPage from "./pages/FeedPage";
 
 function App() {
   return (
@@ -35,6 +38,9 @@ function App() {
         <Route path="/user" element={<UserPage />} />
         <Route path="/complete" element={<CompleteQPage />} />
         <Route path="/list" element={<ThemePage />} />
+        <Route path="/myfeed" element={<FeedPage />} />
+        <Route path="/myfeed/questions" element={<OthersQuestionPage />} />
+        <Route path="/myfeed/write/:id" element={<OthersWritePage />} />
       </Routes>
     </>
   );

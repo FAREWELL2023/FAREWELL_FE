@@ -107,7 +107,7 @@ const UserPage = () => {
                 <BoxIcon src={key}/>
                 <Content>
                 <ContentTitle onClick={() => {
-                navigate('/'); // 나의 회고록 페이지로 이동
+                navigate('/list'); // 나의 회고록 페이지로 이동
             }}>내가 쓰는 나의 2023</ContentTitle>
                 <ContentTxt>오늘의 질문에 답변하기</ContentTxt>
                 </Content>             
@@ -115,7 +115,7 @@ const UserPage = () => {
             <SelectBox>
                 <BoxIcon src={comments}/>
                 <Content onClick={() => {
-                navigate('/'); // 남의 회고록 페이지로 이동
+                navigate('/myfeed'); // 남의 회고록 페이지로 이동
             }}>
                 <ContentTitle>내가 쓰는 나의 2023</ContentTitle>
                 <ContentTxt>친구들의 한마디 보기</ContentTxt>
