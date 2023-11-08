@@ -85,7 +85,7 @@ const MyEndingPage = () => {
             </ListBox>
             <StyledButton>
                 <CheckButton onClick={() => {
-                    navigate('/mylist');
+                    navigate('/thanku');
                 }}/>
             </StyledButton>
         </Wrapper>
