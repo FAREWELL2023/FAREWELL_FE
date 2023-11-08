@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import logo from '../images/key_logo.svg';
 import christmastree from '../images/3dicon/christmastree.png';
+import checkbutton from '../images/3dicon/checkbutton_yellow.png';
 
 const Wrapper = styled.div`
     width: 100vw;
@@ -51,27 +52,66 @@ const QuestionList=styled.div`
 `;
 
 const QuestionAnswer=styled.div`
+    padding-top:1vh;
+    >textarea{
+    width:81vw;
+    height: 25vh;
+    margin: 1.5vh 10vw;
+    resize: none;
+    border:none;
+    outline:none;
+    background-color:#262626;
     color: #FFF;
+    }
+    >textarea::placeholder {
+        color: #D9D9D9;
+        font-size: 0.8rem;        
+    }
 `;
 
+const SubmitButton=styled.button`
+    padding-top: 100vh;
+`
 
-const OthersQuestionPage = () => {
+const OthersWritePage = () => {
+    const location = useLocation();
+    const [answer, setAnswer] = useState('');
+    const QInfo = location.state; 
+    const navigate = useNavigate();
+
+    const onChangeAnswer = (e) => {
+        const answer = e.target.value;
+        setAnswer(answer);
+    };
+
+    const onClick = (e) => {
+        navigate('/myfeed');
+    };
 
     return (
-        <Wrapper>    
-            <Logo><img src={christmastree} style={{width: "42vw", height:"16vh"}}/></Logo>
-            <img src={logo} style={{display:"flex", padding: "5vh 0 0 7vw"}}/>
+        <Wrapper>
+            <Logo><img src={christmastree} style={{ width: "42vw", height: "16vh" }} /></Logo>
+            <img src={logo} style={{ display: "flex", padding: "5vh 0 0 7vw" }} />
             <TitleTxt1>name님에게 한마디</TitleTxt1>
             <Title>질문 작성하기</Title>
             <TitleTxt2>질문에 답변하여 name님의 회고록을 채워주세요.</TitleTxt2>
-                <QuestionList>
-                    <div>Q.~~~</div>
-                </QuestionList>
-                <QuestionAnswer>
-                    <div>A.~~~</div>
-                </QuestionAnswer>
+            <QuestionList>
+                {QInfo.question}
+            </QuestionList>
+            <QuestionAnswer>
+                <textarea
+                    type="text-area"
+                    name="answer"
+                    value={answer}
+                    onChange={onChangeAnswer}
+                    placeholder="답변을 작성해주세요."
+                    required
+                />
+            </QuestionAnswer>
+            <SubmitButton onClick={onClick} style={{padding:"4vh 0vw 0vh 65vw", border:"none", background: "transparent"}}>
+                <img src={checkbutton} style={{ width: "30vw", height: "10vh" }} />
+            </SubmitButton>
         </Wrapper>
     );
 };
-
-export default OthersQuestionPage;
+export default OthersWritePage;

@@ -51,18 +51,23 @@ const QuestionList=styled.div`
     border-radius:41.85px;
 `;
 
-const questionlist = [
-    {number: 1, question: "Q. 올해 이 사람에게 가장 고마웠던 일은?"},
-    {number: 2, question: "Q. 올해 이 사람에게 가장 미안했던 일은?"},
-    {number: 3, question: "Q. 올해 이 사람이 가장 빛났던 순간은?"},
-    {number: 4, question: "Q. 올해 이 사람이 가장 웃겼던 순간은?"},
-    {number: 5, question: "Q. 올해 이 사람과 함께한 행복했던 순간은?"},
-    {number: 6, question: "Q. 올해 이 사람과 함께한 잊을 수 없던 순간"},
-    {number: 7, question: "Q. 올해 이 사람에게 하고싶었지만 못 했던 말"},
-    {number: 8, question: "Q. 2023을 마무리하며 이 사람에게 한 마디"}
-];
-
 const OthersQuestionPage = () => {
+    const navigate = useNavigate();
+
+    const questionlist = [
+        {number: 1, question: "Q. 올해 이 사람에게 가장 고마웠던 일은?"},
+        {number: 2, question: "Q. 올해 이 사람에게 가장 미안했던 일은?"},
+        {number: 3, question: "Q. 올해 이 사람이 가장 빛났던 순간은?"},
+        {number: 4, question: "Q. 올해 이 사람이 가장 웃겼던 순간은?"},
+        {number: 5, question: "Q. 올해 이 사람과 함께한 행복했던 순간은?"},
+        {number: 6, question: "Q. 올해 이 사람과 함께한 잊을 수 없던 순간"},
+        {number: 7, question: "Q. 올해 이 사람에게 하고싶었지만 못 했던 말"},
+        {number: 8, question: "Q. 2023을 마무리하며 이 사람에게 한 마디"}
+    ];    
+
+    const onClick=(item)=>{
+        navigate(`/myfeed/write/${item.number}`, {state: {question: item.question}});
+    }
 
     return (
         <Wrapper>    
@@ -72,7 +77,9 @@ const OthersQuestionPage = () => {
             <Title>질문 선택하기</Title>
             <TitleTxt2>질문에 답변하여 name님의 회고록을 채워주세요.</TitleTxt2>
             {questionlist.map((item) => (
-                <QuestionList key={item.number}>
+                <QuestionList 
+                key={item.number} 
+                onClick={()=> onClick(item)}>
                     {item.question}
                 </QuestionList>
             ))}

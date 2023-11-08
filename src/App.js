@@ -30,7 +30,7 @@ function App() {
         <Route path="/complete" element={<CompleteQPage />} />
         <Route path="/list" element={<ThemePage />} />
         <Route path="/myfeed/questions" element={<OthersQuestionPage />} />
-        <Route path="/myfeed/write" element={<OthersWritePage />} />
+        <Route path="/myfeed/write/:id" element={<OthersWritePage />} />
       </Routes>
     </>
   );
