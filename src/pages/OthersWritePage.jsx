@@ -75,6 +75,7 @@ const SubmitButton=styled.button`
 
 const OthersWritePage = () => {
     const location = useLocation();
+    const [question, setQuestion]=useState('');
     const [answer, setAnswer] = useState('');
     const QInfo = location.state; 
     const navigate = useNavigate();
@@ -85,7 +86,10 @@ const OthersWritePage = () => {
     };
 
     const onClick = (e) => {
-        navigate('/myfeed');
+        navigate('/myfeed');  
+        setQuestion(QInfo.question);
+/*      console.log("Question: ", QInfo.question);
+        console.log("Answer: ",answer); */
     };
 
     return (
