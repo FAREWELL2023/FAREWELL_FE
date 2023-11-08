@@ -14,6 +14,7 @@ import AnswerRatePage from "./pages/Ending/AnswerRatePage";
 import MyEndingPage from "./pages/Ending/MyEndingPage";
 import CompleteQPage from "./pages/CompleteQPage";
 import ThemePage from "./pages/ThemePage";
+import ThxPage from "./pages/Ending/ThxPage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
       <Route path="/endingopen" element={<EndingOpenPage/>} />
       <Route path="/endingrate" element={<AnswerRatePage/>}/>
       <Route path="/myending" element={<MyEndingPage/>}/>
+      <Route path="/thanku" element={<ThxPage/>}/>
         <Route path="/user" element={<UserPage />} />
         <Route path="/complete" element={<CompleteQPage />} />
         <Route path="/list" element={<ThemePage />} />
