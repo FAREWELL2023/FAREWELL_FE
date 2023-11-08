@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Axios } from 'axios';
 
 import logo from '../images/key_logo.svg';
 import bell from '../images/3dicon/jinglebells.png';
+import share from '../images/3dicon/share.png';
 import menu from '../images/3dicon/menubar.png';
 import write from '../images/3dicon/pencil.png';
 
@@ -19,6 +20,14 @@ const Wrapper = styled.div`
 const Logo = styled.div`
     position: absolute;
     right: 30px;
+`
+const Share= styled.img`    
+    position: absolute;
+    display:flex;
+    padding: 3vh 0 0 82vw;
+    width: 7vw;
+    height:3vh;
+    float:right;
 `
 const Title = styled.div`
     color: #fff;
@@ -43,7 +52,6 @@ const Menu = styled.img`
     width:3.5vw;
     height:2.3vh;
     float:right;
-    cursot:pointer;
 `;
 
 const Question=styled.div`
@@ -92,6 +100,8 @@ const SubMenuItem = styled.div`
 
 const FeedPage = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+
     const [feeds, setFeeds]=useState([]);
     const [editedFeeds, setEditedFeeds]=useState([]);
     const [subMenuVisibility, setSubMenuVisibility] = useState([]); // State for sub-menu visibility
@@ -116,6 +126,16 @@ const FeedPage = () => {
         const updatedSubMenuVisibility = [...subMenuVisibility];
         updatedSubMenuVisibility[index] = !updatedSubMenuVisibility[index];
         setSubMenuVisibility(updatedSubMenuVisibility);
+    };
+
+    const handleCopyClipBoard = async (text: string) => {
+        console.log(location);
+        try {
+            await navigator.clipboard.writeText(text);
+            alert("클립보드에 링크가 복사되었어요.");
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     useEffect(() => {
@@ -154,6 +174,8 @@ const FeedPage = () => {
         <Wrapper>    
             <Logo><img src={bell} style={{width: "30vw", height:"11vh"}}/></Logo>
             <img src={logo} style={{display:"flex", padding: "5vh 0 0 7vw"}}/>
+{/*             <Share src={share} onClick={() => handleCopyClipBoard(`${baseUrl}${location.pathname}`)}/> */}
+            <Share src={share} onClick={() => handleCopyClipBoard(`http://localhost:3000${location.pathname}`)}/>
             <Title>name님에게 한마디</Title>
 {/*             {questionlist.map((feed, index) => ( */}
                 {feeds.map((feed, index) => (    
