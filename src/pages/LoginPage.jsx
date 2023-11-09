@@ -78,37 +78,40 @@ function LoginPage(props) {
     setPassword(event.currentTarget.value);
   };
 
-  const onClickLogin = () => {
-    console.log("Login");
-    console.log("email: ", email);
-    console.log("password: ", password);
+  const onClickLogin = (e) => {
+    e.preventDefault();
+
+    let UserInfo = {
+      email: email,
+      password: password,
+    };
+
+    console.log("UserInfo: ", UserInfo);
+
     axios
-      .post("/accounts/auth", null, {
-        params: {
-          user_email: email,
-          user_password: password,
-        },
-      })
+      .post("http://13.125.156.150/accounts/auth/", UserInfo)
       .then((res) => {
         console.log(res);
-        console.log("res.data.userEmail::", res.data.userEmail);
-        console.log("res.data.msg::", res.data.msg);
-        if (res.data.userEmail === undefined) {
-          console.log("=================", res.data.msg);
+
+        if (res.data.user.email === undefined) {
+          console.log("=================", res.data.message);
           alert("입력한 이메일이 일치하지 않습니다.");
-        } else if (res.data.userEmail === null) {
+        } else if (res.data.user.email === null) {
           console.log(
             "=================",
             "입력하신 비밀번호가 일치하지 않습니다."
           );
           alert("입력하신 비밀번호가 일치하지 않습니다.");
-        } else if (res.data.userEmail === email) {
+        } else if (res.data.user.email === UserInfo.email) {
           console.log("=================", "로그인 성공");
-          sessionStorage.setItem("email", email);
+          sessionStorage.setItem("email", UserInfo.email);
         }
         navigate(`/user`);
       })
-      .catch();
+      .catch((err) => {
+        console.log(err);
+        console.log(err.response);
+      });
   };
 
   /*     //페이지 렌더링 후 가장 처음 호출되는 함수

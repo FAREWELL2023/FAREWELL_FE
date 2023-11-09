@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 
 import img_group from '../images/3dicon/userpage_group.png';
 import key from '../images/3dicon/key.jpg';
 import comments from '../images/3dicon/comments.png';
+import axios from 'axios';
 
 const Wrapper = styled.div`
     background-color: #262626;
@@ -64,7 +65,7 @@ const SelectBox=styled.div`
     color: black;
     margin-bottom: 3vh;
     margin-left: 9vw;
-    box shadow: 20px 20px grey;
+    //box shadow: 20px 20px grey;
 /*     box-shadow: 20px grey;
     spread-radius: 5px; */
 `
@@ -94,6 +95,24 @@ const ContentTxt = styled.div`
 
 const UserPage = () => {
     const navigate = useNavigate();
+    const username = useState("");
+    const keyword1 = useState("");
+    const keyword2 = useState("");
+    
+    const getUserdata = () => {
+        axios.get("http://13.125.156.150/accounts/auth/")
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error('Error fetching cards: ', error);
+        });
+    };
+
+    useEffect(() => {
+        getUserdata();
+    }, []);
+
     return (
         <div>
             <Wrapper>
