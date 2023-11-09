@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import logo from '../../images/key_logo.svg';
 import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import Button from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Wrapper = styled.div`
     background-color: #262626;
@@ -49,6 +50,18 @@ const AnswerRatePage = () => {
     const [howmany, setHownamy] = useState(23);
     const navigate = useNavigate();
 
+    const getRate = () => {
+        axios.get('http://13.125.156.150/')
+        .then(response => {
+            setPercent();
+            setHownamy();
+        })
+    }
+
+    useEffect(() => {
+        //getRate();
+    }, []);
+
     return (
         <Wrapper>
             <img src={logo} style={{display:"flex", padding: "5vh 0 0 7vw"}}/>
@@ -56,7 +69,7 @@ const AnswerRatePage = () => {
                 <CircularProgressbarWithChildren value={percent}
             styles={{
                 root: {
-                    height: "40vh", position: "relative"},
+                    height: "40vh", marginTop:"5vh"},
                 path: {
                     stroke: "#EFEC69",
                     transition: "stroke-dashoffset 0.5s ease 0s",

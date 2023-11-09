@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import logo from '../images/key_logo.svg';
 import MyQList from '../components/MyQList';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Wrapper = styled.div`
     background-color: #262626;
@@ -36,6 +37,18 @@ const MyListPage = () => {
     const navigate = useNavigate();
     const questions = useState([]);
     console.log(question[0].answer);
+
+    const posttheme = () => {
+        axios.post('')
+        .then(
+
+        )
+    };
+
+    useEffect(() => {
+        //posttheme();
+        //getqlist();
+    });
 
     return (
         <Wrapper>

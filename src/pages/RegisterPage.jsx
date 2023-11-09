@@ -167,19 +167,20 @@ function RegisterPage(props) {
         console.log('keyword', keywords); */
 
     let UserInfo = {
-      name: username,
+      username: username,
       email: email,
       password: password,
-      keyword: keywords,
+      password2: password2,
+      keywords: keywords,
     };
 
     console.log(UserInfo);
 
-    axios
-      .post("/accounts/register", UserInfo)
+    axios.post("http://13.125.156.150/accounts/register/", UserInfo)
       .then((response) => {
+        console.log(response);
         alert("회원가입 성공!");
-        navigate("./auth");
+        navigate("/acounts/auth");
       })
       .catch((err) => {
         if (!err.response) {
