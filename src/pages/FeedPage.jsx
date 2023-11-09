@@ -1,151 +1,211 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Axios } from 'axios';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Axios } from "axios";
 
-import logo from '../images/key_logo.svg';
-import bell from '../images/3dicon/jinglebells.png';
-import share from '../images/3dicon/share.png';
-import menu from '../images/3dicon/menubar.png';
-import write from '../images/3dicon/pencil.png';
+import logo from "../images/key_logo.svg";
+import bell from "../images/3dicon/jinglebells.png";
+import share from "../images/3dicon/share.png";
+import menu from "../images/3dicon/menubar.png";
+import write from "../images/3dicon/pencil.png";
+import hidden from "../images/3dicon/hidden.png";
 
 const Wrapper = styled.div`
-    width: 100vw;
-    height: 100vh;
-    overflow-x: hidden;
-    background-color: #262626;;
-    align-items: center;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  background-color: #262626;
+  align-items: center;
 `;
 
 const Logo = styled.div`
-    position: absolute;
-    right: 30px;
-`
-const Share= styled.img`    
-    position: absolute;
-    display:flex;
-    padding: 3vh 0 0 82vw;
-    width: 7vw;
-    height:3vh;
-    float:right;
-`
+  position: absolute;
+  right: 30px;
+`;
+const Share = styled.img`
+  position: absolute;
+  display: flex;
+  padding: 3vh 0 0 82vw;
+  width: 7vw;
+  height: 3vh;
+  float: right;
+`;
 const Title = styled.div`
-    color: #fff;
-    font-weight: 700;
-    margin: 3vh 0 1vh 10vw;
-    font-size: 1.1rem;
-`
-const QuestionList=styled.div`
-    background-color:#FFF;
-    color:#262626;
-    width:81vw;
-    height:8vh;
-    text-align:center;
-    font-size: 0.8rem;
-    margin: 1.5vh auto;
-    border-radius:16.34px;
+  color: #fff;
+  font-weight: 700;
+  margin: 3vh 0 1vh 10vw;
+  font-size: 1.1rem;
+`;
+const QuestionList = styled.div`
+  background-color: #fff;
+  color: #262626;
+  width: 81vw;
+  height: 8vh;
+  text-align: center;
+  font-size: 0.8rem;
+  margin: 1.5vh auto;
+  border-radius: 16.34px;
 `;
 
 const Menu = styled.img`
-    padding-top: 1.5vh;
-    padding-right :4vw;  
-    width:3.5vw;
-    height:2.3vh;
-    float:right;
+  padding-top: 1.5vh;
+  padding-right: 3vw;
+  width: 3.5vw;
+  height: 2.3vh;
+  float: right;
 `;
 
-const Question=styled.div`
-    line-height:5vh;
-    padding:0vh 4vw;
-    color: #262626;
-    font-weight: 500;
-    font-size: 0.9rem;
+const Lock = styled.img`
+  padding-top: 2vh;
+  float: right;
+  height: 10px;
+  width: 10px;
 `;
 
-const Answer=styled.div`
-    line-height:1vh;
-    color: #505050;
-    font-weight: 400;
-    font-size: 0.8rem;
-    margin: 0vh 4vw;
+const Question = styled.div`
+  line-height: 5vh;
+  padding: 0vh 4vw;
+  color: #262626;
+  font-weight: 500;
+  font-size: 0.9rem;
 `;
 
-const SubmitButton=styled.button`
-    border:none;
-    background: transparent;
-    position:fixed;
-    top: 80%;
-    left: 68%;
-`
+const Answer = styled.div`
+  line-height: 1vh;
+  color: #505050;
+  font-weight: 400;
+  font-size: 0.8rem;
+  margin: 0vh 4vw;
+`;
+
+const SubmitButton = styled.button`
+  border: none;
+  background: transparent;
+  position: fixed;
+  top: 80%;
+  left: 68%;
+`;
 const SubMenu = styled.div`
-    position: absolute;
-    background-color: #D9D9D9;
-    border-radius:4px;
-    width:53px;
-    height:47px;
-    right: 0vw; 
-    display: ${props => props.visible ? 'block' : 'none'};
+  position: absolute;
+  background-color: #d9d9d9;
+  border-radius: 4px;
+  width: 53px;
+  height: 47px;
+  right: 0vw;
+  display: ${(props) => (props.visible ? "block" : "none")};
 `;
 
 const SubMenuItem = styled.div`
-    color:#505050;
-    font-weight: 300;
-    font-size: 0.7rem;
-    padding: 3px 0;
-    
-    &:not(:last-child) {
-        border-bottom: 0.1px solid #262626;; /* Remove border from the last SubMenuItem */
-    }
+  color: #505050;
+  font-weight: 300;
+  font-size: 0.7rem;
+  padding: 3px 0;
+  &:not(:last-child) {
+    border-bottom: 0.1px solid #262626; /* Remove border from the last SubMenuItem */
+  }
 `;
 
 const FeedPage = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    const [feeds, setFeeds]=useState([]);
-    const [editedFeeds, setEditedFeeds]=useState([]);
-    const [subMenuVisibility, setSubMenuVisibility] = useState([]); // State for sub-menu visibility
+  const [feeds, setFeeds] = useState([]);
+  const [editedFeeds, setEditedFeeds] = useState([]);
+  const [subMenuVisibility, setSubMenuVisibility] = useState([]);
+  const [userLoggedIn, setUserLoggedIn] = useState(true);
+  const [showImage, setShowImage] = useState(false);
+  const [questionlist, setQuestionList] = useState([
+    {
+      number: 1,
+      question: "Q. 올해 이 사람에게 가장 고마웠던 일은?",
+      answer: "히히",
+      hidden: false,
+    },
+    {
+      number: 2,
+      question: "Q. 올해 이 사람에게 가장 미안했던 일은?",
+      answer: "히히",
+      hidden: false,
+    },
+    {
+      number: 3,
+      question: "Q. 올해 이 사람이 가장 빛났던 순간은?",
+      answer: "히히",
+      hidden: false,
+    },
+    {
+      number: 4,
+      question: "Q. 올해 이 사람이 가장 웃겼던 순간은?",
+      answer: "히히",
+      hidden: false,
+    },
+    {
+      number: 5,
+      question: "Q. 올해 이 사람과 함께한 행복했던 순간은?",
+      answer: "히히",
+      hidden: false,
+    },
+    {
+      number: 6,
+      question: "Q. 올해 이 사람과 함께한 잊을 수 없던 순간",
+      answer: "히히",
+      hidden: false,
+    },
+    {
+      number: 7,
+      question: "Q. 올해 이 사람에게 하고싶었지만 못 했던 말",
+      answer: "히히",
+      hidden: false,
+    },
+    {
+      number: 8,
+      question: "Q. 2023을 마무리하며 이 사람에게 한 마디",
+      answer: "히히",
+      hidden: false,
+    },
+  ]);
 
-/*      const questionlist = [
-        {number: 1, question: "Q. 올해 이 사람에게 가장 고마웠던 일은?", answer:"히히"},
-        {number: 2, question: "Q. 올해 이 사람에게 가장 미안했던 일은?", answer:"히히"},
-        {number: 3, question: "Q. 올해 이 사람이 가장 빛났던 순간은?", answer:"히히"},
-        {number: 4, question: "Q. 올해 이 사람이 가장 웃겼던 순간은?", answer:"히히"},
-        {number: 5, question: "Q. 올해 이 사람과 함께한 행복했던 순간은?", answer:"히히"},
-        {number: 6, question: "Q. 올해 이 사람과 함께한 잊을 수 없던 순간", answer:"히히"},
-        {number: 7, question: "Q. 올해 이 사람에게 하고싶었지만 못 했던 말", answer:"히히"},
-        {number: 8, question: "Q. 2023을 마무리하며 이 사람에게 한 마디", answer:"히히"}
-    ];     */
-    
-    const onClickWrite=()=>{
-        navigate(`/myfeed/questions`);
+  const onClickWrite = () => {
+    navigate(`/myfeed/questions`);
+  };
+
+  const toggleSubMenu = (index) => {
+    const updatedSubMenuVisibility = [...subMenuVisibility];
+    updatedSubMenuVisibility[index] = !updatedSubMenuVisibility[index];
+    setSubMenuVisibility(updatedSubMenuVisibility);
+  };
+
+  const handleCopyClipBoard = async (text: string) => {
+    console.log(location);
+    try {
+      await navigator.clipboard.writeText(text);
+      alert("클립보드에 링크가 복사되었어요.");
+    } catch (err) {
+      console.log(err);
     }
+  };
 
-    const toggleSubMenu = (index) => {
-        // Toggle the visibility of the sub-menu for a specific question
-        const updatedSubMenuVisibility = [...subMenuVisibility];
-        updatedSubMenuVisibility[index] = !updatedSubMenuVisibility[index];
-        setSubMenuVisibility(updatedSubMenuVisibility);
-    };
+  const hideItem = (index) => {
+    const updatedList = [...questionlist];
+    //console.log("1: ", updatedList[index].hidden);
+    if (updatedList[index].hidden === false) {
+      updatedList[index].hidden = true;
+    } else if (updatedList[index].hidden === true) {
+      updatedList[index].hidden = false;
+    }
+    //console.log("2: ", updatedList[index].hidden);
+    updatedList[index].showImage = !updatedList[index].showImage;
+    setQuestionList(updatedList);
+  };
 
-    const handleCopyClipBoard = async (text: string) => {
-        console.log(location);
-        try {
-            await navigator.clipboard.writeText(text);
-            alert("클립보드에 링크가 복사되었어요.");
-        } catch (err) {
-            console.log(err);
-        }
-    };
+  useEffect(() => {
+    // fecthFeeds();
+    // SubMenu visible 여부 false로 초기화
+    const initialSubMenuVisibility = new Array(feeds.length).fill("false"); //'false'로 안 하면 boolean값 에러 뜸
+    setSubMenuVisibility(initialSubMenuVisibility);
+  }, [feeds]);
 
-    useEffect(() => {
-        // fecthFeeds();
-        // SubMenu visible 여부 false로 초기화
-        const initialSubMenuVisibility = new Array(feeds.length).fill('false'); //'false'로 안 하면 boolean값 에러 뜸
-        setSubMenuVisibility(initialSubMenuVisibility);
-    }, [feeds]);
-
-/*     const fetchFeeds = () => {
+  /*     const fetchFeeds = () => {
         axios.get('http://')
         .then(response=>{
             setFeeds(response.data);
@@ -170,41 +230,51 @@ const FeedPage = () => {
         });
     }; */
 
-    return (
-        <Wrapper>    
-            <Logo><img src={bell} style={{width: "30vw", height:"11vh"}}/></Logo>
-            <img src={logo} style={{display:"flex", padding: "5vh 0 0 7vw"}}/>
-{/*             <Share src={share} onClick={() => handleCopyClipBoard(`${baseUrl}${location.pathname}`)}/> */}
-            <Share src={share} onClick={() => handleCopyClipBoard(`http://localhost:3000${location.pathname}`)}/>
-            <Title>name님에게 한마디</Title>
-{/*             {questionlist.map((feed, index) => ( */}
-                {feeds.map((feed, index) => (    
-                <QuestionList key={index}>
-                    <Menu src={menu} onClick={() => toggleSubMenu(index)} />
-                    <SubMenu visible={subMenuVisibility[index]}>
-                        <SubMenuItem /* onClick={deleteFeed} */>삭제하기</SubMenuItem>
-                        <SubMenuItem>나만보기</SubMenuItem>
-                    </SubMenu>
-                    <Question>{feed.question}</Question>
-                    <Answer>{feed.answer}</Answer>
-                </QuestionList>
-            ))}
+  return (
+    <Wrapper>
+      <Logo>
+        <img src={bell} style={{ width: "30vw", height: "11vh" }} />
+      </Logo>
+      <img src={logo} style={{ display: "flex", padding: "5vh 0 0 7vw" }} />
+      {/*             <Share src={share} onClick={() => handleCopyClipBoard(`${baseUrl}${location.pathname}`)}/> */}
+      <Share
+        src={share}
+        onClick={() =>
+          handleCopyClipBoard(`http://localhost:3000${location.pathname}`)
+        }
+      />
+      <Title>name님에게 한마디</Title>
+      {userLoggedIn
+        ? questionlist.map(
+            (feed, index /* ? feeds.map((feed, index) => ( */) => (
+              <QuestionList key={index}>
+                <Menu src={menu} onClick={() => toggleSubMenu(index)} />
+                {feed.showImage && <Lock src={hidden} />}
+                <SubMenu visible={subMenuVisibility[index]}>
+                  <SubMenuItem /* onClick={deleteFeed} */>삭제하기</SubMenuItem>
+                  <SubMenuItem onClick={() => hideItem(index)}>
+                    {feed.hidden == false ? "나만보기" : "전체공개"}
+                  </SubMenuItem>
+                </SubMenu>
+                <Question>{feed.question}</Question>
+                <Answer>{feed.answer}</Answer>
+              </QuestionList>
+            )
+          )
+        : questionlist.map((feed, index) =>
+            feed.hidden ? null : (
+              <QuestionList key={index}>
+                <Question>{feed.question}</Question>
+                <Answer>{feed.answer}</Answer>
+              </QuestionList>
+            )
+          )}
 
-{/*             추후 삭제 예정 */}
-            <QuestionList>
-                    <Menu src={menu} onClick={() => toggleSubMenu(1)} />
-                    <SubMenu visible={subMenuVisibility[1]}>
-                        <SubMenuItem /* onClick={deleteFeed} */>삭제하기</SubMenuItem>
-                        <SubMenuItem>나만보기</SubMenuItem>
-                    </SubMenu>
-                    <Question>임시로 추가</Question>
-                    <Answer>연결 확인하려구요...</Answer>
-                </QuestionList>
-            <SubmitButton onClick={onClickWrite}>
-                <img src={write} style={{ width: "28vw", height: "10vh" }} />
-            </SubmitButton>
-        </Wrapper>
-    );
+      <SubmitButton onClick={onClickWrite}>
+        <img src={write} style={{ width: "28vw", height: "10vh" }} />
+      </SubmitButton>
+    </Wrapper>
+  );
 };
 
-export default FeedPage;  
+export default FeedPage;
