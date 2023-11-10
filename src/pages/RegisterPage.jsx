@@ -176,12 +176,11 @@ function RegisterPage(props) {
 
     console.log(UserInfo);
 
-    axios
-      .post("http://13.125.156.150/accounts/register/", UserInfo)
+    axios.post("http://13.125.156.150/accounts/register/", UserInfo)
       .then((response) => {
         console.log(response);
         alert("회원가입 성공!");
-        navigate("/accounts/auth");
+        navigate('/accounts/auth');
       })
       .catch((err) => {
         if (!err.response) {
@@ -189,7 +188,7 @@ function RegisterPage(props) {
         } else {
           console.log(err);
           console.log(err.response.data);
-          navigate("/accounts/auth"); // **일단 화면 넘어가기 위해서 추가해둠**
+          navigate('/accounts/auth'); // **일단 화면 넘어가기 위해서 추가해둠**
         }
       });
   };

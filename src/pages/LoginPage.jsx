@@ -12,6 +12,8 @@ import checkbutton from "../images/3dicon/checkbutton.png";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
+import { useCookies } from 'react-cookie';
+
 const Wrapper = styled.div`
   background-color: #efec69;
   width: 100vw;
@@ -63,6 +65,8 @@ function LoginPage(props) {
   /* 로딩 메시지 */
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
+  const [cookies, setCookie] = useCookies(['access', 'refresh']); // 'your_token_cookie'는 쿠키 이름
+
 
   const onChangeEmail = (event) => {
     const currentEmail = event.target.value;
@@ -93,23 +97,12 @@ function LoginPage(props) {
     console.log("UserInfo: ", UserInfo);
 
     axios
-      .post("http://13.125.156.150/accounts/auth/", UserInfo)
+      .post("http://13.125.156.150/accounts/auth//", UserInfo)
       .then((res) => {
         console.log(res);
 
-        // 토큰 및 로그인 데이터 저장 (유저이름,키워드는 로컬스토리지/토큰은 쿠키)
-        if (res.data.message) {
-          localStorage.setItem("user", res.data.user.username);
-          localStorage.setItem("keyword1", res.data.keywords[0]);
-          localStorage.setItem("keyword2", res.data.keywords[1]);
-          cookies.set("user_id", res.data.user.id, { path: "/" });
-          cookies.set("access", res.data.token.access, {
-            path: "/",
-          });
-          cookies.set("refresh", res.data.token.refresh, {
-            path: "/",
-          });
-        }
+        localStorage.setItem('keyword1', res.data.keywords[0]);
+        localStorage.setItem('keyword2', res.data.keywords[1]);
 
         if (res.data.user.email === undefined) {
           console.log("=================", res.data.message);
@@ -122,6 +115,12 @@ function LoginPage(props) {
           alert("입력하신 비밀번호가 일치하지 않습니다.");
         } else if (res.data.user.email === UserInfo.email) {
           console.log("=================", "로그인 성공");
+
+          // 토큰 값을 쿠키에 저장
+          const token = res.data.token;
+          setCookie('access', token.access, { path: '/' });
+          setCookie('refresh', token.refresh, { path: '/' });
+
           sessionStorage.setItem("email", UserInfo.email);
         }
         navigate(`/user`);
