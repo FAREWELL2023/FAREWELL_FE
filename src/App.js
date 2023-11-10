@@ -26,9 +26,9 @@ function App() {
     <Routes>
       <Route path='/' element={<LandingPage />}/>
       <Route path='/first' element={<FirstPage />}/>
-      <Route path='/mylist' element={<MyListPage/>}/>
-      <Route path='/mywrite/:id' element={<MyWritePage/>}/>
-      <Route path='/myview/:id' element={<MyViewPage/>}/>
+      <Route path='/mylist/:theme' element={<MyListPage/>}/>
+      <Route path='/mywrite/:themeid/:id' element={<MyWritePage/>}/>
+      <Route path='/myview/:themeid/:id' element={<MyViewPage/>}/>
       <Route path="/accounts/register" element={<RegisterPage />} />
       <Route path="/accounts/auth" element={<LoginPage />} />
       <Route path="/endingopen" element={<EndingOpenPage/>} />

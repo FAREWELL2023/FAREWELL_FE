@@ -6,10 +6,7 @@ import img_group from '../images/3dicon/userpage_group.png';
 import key from '../images/3dicon/key.jpg';
 import comments from '../images/3dicon/comments.png';
 import axios from 'axios';
-import { useCookies } from 'react-cookie';
-//import { getCookie } from '../Cookie';
-import Cookies from "universal-cookie";
-const cookies = new Cookies();
+import {useCookies} from 'react-cookie'
 
 const Wrapper = styled.div`
     background-color: #262626;
@@ -97,33 +94,90 @@ const ContentTxt = styled.div`
     margin-top: 10px;
 `
 
-const UserPage = (props) => {
+const UserPage = () => {
     const navigate = useNavigate();
-    const username = localStorage.getItem("user");
-    const keyword1 = localStorage.getItem("keyword1");
-    const keyword2 = localStorage.getItem("keyword2");
-    const access = cookies.get("access");
+    const [username, setUsername] = useState("");
+    const keyword1 = localStorage.getItem('keyword1');
+    const keyword2 = localStorage.getItem('keyword2');
+    const [cookies, setCookie] = useCookies();
     
-    const getUserdata = () => {
-        console.log(`accesToken= ${access}`);
+    //   {
+    //     withCredentials: true,
+    //     headers: {
+    //         Authorization: `${cookies.access}`,
+    //     }
+    // }
 
-        axios.get("http://13.125.156.150/accounts/auth/", {
-            headers: {
-                Authorization: `Bearer ${access}`,
-              },
-            })
-        .then((response) => {
+    // {
+    //     headers : {
+    //         'content-type' : 'application/json',
+    //         'accept' : 'application/json',
+    //         'authorization' : `bearer ${cookies.access}`
+    //     }
+    // }
+
+
+//     headers: {
+//         Authorization: `Bearer ${cookies.access}`,
+// },
+    const getUserdata = () => {
+        axios.get("http://13.125.156.150/accounts/auth/",{
+            withCredentials:true,
+        })
+        .then(response => {
             console.log(response.data);
-            
+            // console.log(cookies.access)
+            setUsername(response.data.user.username);
         })
         .catch(error => {
-            console.error('Error fetching userdata: ', error);
+            if (error.response && error.response.status === 401) {
+                // 401 Unauthorized 에러가 발생한 경우
+                // 여기에 refresh 토큰을 사용하여 새로운 access 토큰을 요청하는 로직을 추가
+                // refreshAccessToken();
+                console.error('Error fetching cards: ', error);
+            } else {
+                console.error('Error fetching cards: ', error);
+            }
+            // console.error('Error fetching cards: ', error);
         });
     };
 
+    // refresh 토큰을 사용하여 새로운 access 토큰을 요청하는 함수
+// const refreshAccessToken = () => {
+//     // 저장된 refresh 토큰을 얻어온다.
+//     const refresh_token = cookies.refresh;
+
+//     // 서버에 새로운 access 토큰을 요청한다.
+//     axios.post("http://13.125.156.150/accounts/auth/refresh/", {
+//         refresh: refresh_token,
+//     })
+//     .then(response => {
+//         // 새로운 access 토큰을 받았을 경우
+//         const new_access_token = response.data.access;
+//         console.log(new_access_token);
+
+//         // 받은 access 토큰으로 이전 요청을 다시 시도한다.
+//         axios.get("http://13.125.156.150/accounts/auth/", {
+//             headers: {
+//                 Authorization: `Bearer ${new_access_token}`,
+//             },
+//             withCredentials: true,
+//         })
+//         .then(response => {
+//             console.log(response.data);
+//         })
+//         .catch(error => {
+//             console.error('Error after refreshing access token: ', error);
+//         });
+//     })
+//     .catch(error => {
+//         console.error('Error refreshing access token: ', error);
+//     });
+// };
+
     useEffect(() => {
         getUserdata();
-    }, [access]);
+    }, []);
 
     return (
         <div>
