@@ -6,6 +6,10 @@ import img_group from '../images/3dicon/userpage_group.png';
 import key from '../images/3dicon/key.jpg';
 import comments from '../images/3dicon/comments.png';
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
+//import { getCookie } from '../Cookie';
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const Wrapper = styled.div`
     background-color: #262626;
@@ -93,33 +97,41 @@ const ContentTxt = styled.div`
     margin-top: 10px;
 `
 
-const UserPage = () => {
+const UserPage = (props) => {
     const navigate = useNavigate();
-    const username = useState("");
-    const keyword1 = useState("");
-    const keyword2 = useState("");
+    const username = localStorage.getItem("user");
+    const keyword1 = localStorage.getItem("keyword1");
+    const keyword2 = localStorage.getItem("keyword2");
+    const access = cookies.get("access");
     
     const getUserdata = () => {
-        axios.get("http://13.125.156.150/accounts/auth/")
-        .then(response => {
+        console.log(`accesToken= ${access}`);
+
+        axios.get("http://13.125.156.150/accounts/auth/", {
+            headers: {
+                Authorization: `Bearer ${access}`,
+              },
+            })
+        .then((response) => {
             console.log(response.data);
+            
         })
         .catch(error => {
-            console.error('Error fetching cards: ', error);
+            console.error('Error fetching userdata: ', error);
         });
     };
 
     useEffect(() => {
         getUserdata();
-    }, []);
+    }, [access]);
 
     return (
         <div>
             <Wrapper>
             <img src={img_group} style={{ width:"450px", height:"340px", margin:"-40px -15px"}}/>
-            <Title>name님의 2023년</Title>
-            <Keyword1>#즐거운</Keyword1>
-            <Keyword2>#사랑스러운</Keyword2>
+            <Title>{username}님의 2023년</Title>
+            <Keyword1># {keyword1}</Keyword1>
+            <Keyword2># {keyword2}</Keyword2>
             <ContentBox>
                 <br/>
             <SelectBox>
