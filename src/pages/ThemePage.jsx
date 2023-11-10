@@ -88,7 +88,7 @@ const ThemePage = () => {
                 {isPublished1?(
                     <div>
                         <ContentBox onClick={() => {
-                            navigate('/mylist'); // 질문 페이지로
+                            navigate('/mylist/1', {state: {themeid: 1, theme: '따뜻했던 2023'}}); // 질문 페이지로
                         }}>
                             <ContentLogo src={rainbow} style={{width:"45px", height: "59px", padding: "0px 0px 0px 15vw"}}/>
                                 <ContentTxt style={{ padding: "0px 16px"}}>따뜻했던 2023</ContentTxt>
@@ -105,7 +105,7 @@ const ThemePage = () => {
                 {isPublished2?(
                     <div>
                         <ContentBox onClick={() => {
-                            navigate('/'); // 질문 페이지로
+                            navigate('/mylist/2', {state: {themeid: 2, theme: '뜨거웠던 2023'}}); // 질문 페이지로
                         }}>
                             <ContentLogo src={palmtree} style={{width:"39px", height: "79px", padding: "0px 0px 0px 16vw"}}/>
                                 <ContentTxt style={{ padding: "0px 20px"}}>뜨거웠던 2023</ContentTxt>
@@ -122,7 +122,7 @@ const ThemePage = () => {
                 {isPublished3?(
                     <div>
                         <ContentBox onClick={() => {
-                            navigate('/'); // 질문 페이지로
+                            navigate('/mylist/3', {state: {themeid: 3, theme: '선선했던 2023'}}); // 질문 페이지로
                         }}>
                         <ContentLogo src={sunflower} style={{width:"65px", height: "75px", padding: "0px 0px 0px 13vw"}}/>
                                 <ContentTxt style={{ padding: "0px 5px"}}>선선했던 2023</ContentTxt>
@@ -139,7 +139,7 @@ const ThemePage = () => {
                 {isPublished4?(
                     <div>
                         <ContentBox onClick={() => {
-                            navigate('/'); // 질문 페이지로
+                            navigate('/mylist/4', {state: {themeid: 4, theme: '낭만웠던 2023'}}); // 질문 페이지로
                         }}>
                         <ContentLogo src={mistletoe} style={{width:"52px", height: "54px", padding: "0px 0px 0px 14vw"}}/>
                                 <ContentTxt style={{ padding: "0px 15px"}}>낭만있던 2023</ContentTxt>
