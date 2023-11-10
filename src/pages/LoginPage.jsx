@@ -2,11 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 import bell from "../images/3dicon/jinglebells.png";
 import logo_2023_black from "../images/logo_2023_black.svg";
 import logo_black from "../images/logo_black.svg";
 import checkbutton from "../images/3dicon/checkbutton.png";
+//import { setCookie } from '../Cookie';
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const Wrapper = styled.div`
   background-color: #efec69;
@@ -92,6 +96,20 @@ function LoginPage(props) {
       .post("http://13.125.156.150/accounts/auth/", UserInfo)
       .then((res) => {
         console.log(res);
+        
+        // 토큰 및 로그인 데이터 저장 (유저이름,키워드는 로컬스토리지/토큰은 쿠키)
+        if (res.data.message) {
+          localStorage.setItem("user", res.data.user.username);
+          localStorage.setItem("keyword1", res.data.keywords[0]);
+          localStorage.setItem("keyword2", res.data.keywords[1]);
+          cookies.set("user_id", res.data.user.id, { path: "/" });
+          cookies.set("access", res.data.token.access, {
+            path: "/",
+          });
+          cookies.set("refresh", res.data.token.refresh, {
+            path: "/",
+          });
+        }
 
         if (res.data.user.email === undefined) {
           console.log("=================", res.data.message);
