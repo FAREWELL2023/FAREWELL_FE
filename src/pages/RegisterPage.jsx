@@ -176,7 +176,7 @@ function RegisterPage(props) {
 
     console.log(UserInfo);
 
-    axios.post("http://13.125.156.150/accounts/register/", UserInfo)
+    axios.post("http://localhost:8000/accounts/register/", UserInfo)
       .then((response) => {
         console.log(response);
         alert("회원가입 성공!");

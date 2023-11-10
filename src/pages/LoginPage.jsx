@@ -97,7 +97,7 @@ function LoginPage(props) {
     console.log("UserInfo: ", UserInfo);
 
     axios
-      .post("http://13.125.156.150/accounts/auth//", UserInfo)
+      .post("http://localhost:8000/accounts/auth/", UserInfo)
       .then((res) => {
         console.log(res);
 

@@ -121,7 +121,7 @@ const UserPage = () => {
 //         Authorization: `Bearer ${cookies.access}`,
 // },
     const getUserdata = () => {
-        axios.get("http://13.125.156.150/accounts/auth/",{
+        axios.get("http://localhost:8000/accounts/auth/",{
             withCredentials:true,
             // console.log(cookies.access)
         })

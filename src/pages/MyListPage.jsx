@@ -63,7 +63,7 @@ const MyListPage = () => {
     console.log(question[0].answer);
 
     const getthemeQ = () => {
-        axios.get("http://13.125.156.150/myfarewell/question/", {
+        axios.get("http://localhost:8000/myfarewell/question/", {
             params: {theme: '따뜻했던 2023'}},
                 { withCredentials: true })
         .then(res => {
