@@ -352,7 +352,7 @@ const FeedEditPage = () => {
       <Share
         src={share}
         onClick={() =>
-          handleCopyClipBoard(`http://localhost:3000${location.pathname}`)
+          handleCopyClipBoard(`http://localhost:8000${location.pathname}`)
         }
       />
       <Title>{username}님에게 한마디</Title>
@@ -364,7 +364,8 @@ const FeedEditPage = () => {
               <SubMenu visible={subMenuVisibility[index]}>
                 <SubMenuItem onClick={deleteFeed}>삭제하기</SubMenuItem>
                 <SubMenuItem onClick={() => hideItem(index)}>
-                  {feed.hidden == false ? "나만보기" : "전체공개"}
+                  {/*     hidden 속성이 없어서 임시로 바꿔둠              {feed.hidden == false ? "나만보기" : "전체공개"} */}
+                  {feed.hidden == false ? "전체공개" : "나만보기"}
                 </SubMenuItem>
               </SubMenu>
               <Question>{feed.question}</Question>
