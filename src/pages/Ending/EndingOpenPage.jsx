@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import keyhold from '../../images/keyhold.svg';
+import keyhold from '../../images/keyhold.png';
 import { useNavigate } from 'react-router-dom';
 //import Modal from 'react-modal';
 import Modal from '../../components/Modal';
@@ -39,7 +39,7 @@ const EndingPage = () => {
             <Modal/>
             <div style={{margin: "auto"}}>
             <Title>사용자님의 2023년 열기</Title>
-            <img src={keyhold} onClick={() => {
+            <img src={keyhold} style={{width: "30vw"}} onClick={() => {
             navigate('/endingrate');
         }}/>
             <Txt>열쇠구멍을 터치해주세요.</Txt>
