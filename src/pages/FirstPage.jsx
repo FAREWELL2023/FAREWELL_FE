@@ -114,7 +114,7 @@ const FirstPage = () => {
       </LoginButton>
       <SignButton
         onClick={() => {
-          navigate("/accounts/register"); // 회원가입페이지로
+          navigate("/accounts/signup"); // 회원가입페이지로
         }}
       >
         회원가입

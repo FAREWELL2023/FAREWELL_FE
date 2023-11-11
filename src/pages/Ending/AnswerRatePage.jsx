@@ -5,6 +5,7 @@ import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
+import keyimg from "../../images/3dicon/keyimg.png";
 import axios from "axios";
 
 const Wrapper = styled.div`
@@ -29,13 +30,21 @@ const Percent = styled.div`
   text-align: center;
   font-weight: 700;
   font-size: 3.4rem;
-  margin-top: 5vh;
+  position: absolute;
+  z-index: 1;
+  left: -15vw;
+  top: -5vh;
 `;
 const Txt = styled.div`
   color: #efec69;
   font-weight: 400;
   text-align: center;
   font-size: 1rem;
+  position: absolute;
+  z-index: 1;
+  width: 50vw;
+  top: 5vh;
+  left: -25vw;
 `;
 const Complete = styled.div`
   color: #fcfcfc;
@@ -43,6 +52,17 @@ const Complete = styled.div`
   font-weight: 700;
   margin-top: 5vh;
   margin-bottom: 3vh;
+`;
+
+const Inside = styled.div`
+    position: relative;
+    > img {
+        position: absolute;
+        z-index: 0;
+        width: 55vw;
+        left: -20vw;
+        top: -6vh;
+    }
 `;
 
 const AnswerRatePage = () => {
@@ -81,14 +101,15 @@ const AnswerRatePage = () => {
           },
         }}
       >
-        <div>
+        <Inside>
           <Percent>{percent}%</Percent>
+          <img src={keyimg} />
           <Txt>
             {howmany}개의 질문에 답변을 했고
             <br />
             {percent}%를 달성했어요!
           </Txt>
-        </div>
+        </Inside>
       </CircularProgressbarWithChildren>
       <Complete>나의 회고록이 완성되었어요!</Complete>
       <Button

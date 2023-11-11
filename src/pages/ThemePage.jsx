@@ -59,7 +59,7 @@ const ThemePage = () => {
     const determinePublicationStatus = () => {
       const currentDate = new Date();
       const publishDate1 = new Date('2023-10-01'); //연결 확인 위해 임시로 바꿔둠!
-      const publishDate2 = new Date('2023-12-08');
+      const publishDate2 = new Date('2023-10-08');
       const publishDate3 = new Date('2023-12-15');
       const publishDate4 = new Date('2023-12-22');
   

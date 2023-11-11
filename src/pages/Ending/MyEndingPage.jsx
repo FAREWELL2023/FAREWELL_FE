@@ -55,7 +55,7 @@ const StyledButton = styled.div`
   z-index: 3;
 `;
 
-/* let dummy = [
+ let dummy = [
   {
     number: 1,
     question: "Q. 올해를 한 마디로 정의하자면?",
@@ -112,7 +112,7 @@ const StyledButton = styled.div`
     question: "Q. 올해 가장 많이 들은 노래는?",
     answer: "post malone - chemical",
   },
-]; */
+]; 
 
 const MyEndingPage = () => {
   const navigate = useNavigate();
@@ -144,13 +144,13 @@ const MyEndingPage = () => {
         <Title>답변 모아보기</Title>
       </div>
       <ListBox>
-        {/*         {dummy.map((list) => (
+        {dummy.map((list) => (
           <EndingList
             number={list.number}
             question={list.question}
             answer={list.answer}
           />
-        ))} */}
+        ))}
         {answerList.map((list, index) => (
           <EndingList
             number={index + 1}

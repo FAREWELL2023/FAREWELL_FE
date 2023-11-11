@@ -123,7 +123,7 @@ const HotList = () => {
             //     }
             // }
             for (let i = 8; i < 15; i++) {
-                hot[i]['answer'] = myanswers[i]['answer_content'];
+                hot[i]['answer'] = myanswers[i].answer_content;
                 hot[i]['isanswer'] = true;
             }
 
