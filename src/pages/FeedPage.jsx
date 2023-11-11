@@ -118,7 +118,7 @@ const FeedPage = () => {
   const [questionlist, setQuestionList] = useState([
     {
       number: 1,
-      question_text: "Q. 올해 이 사람에게 가장 고마웠던 일은?",
+      name: "Q. 올해 이 사람에게 가장 고마웠던 일은?",
       content: "프론트 세션 이해가 잘 안 될 때 도와줬다! ",
       hidden: false,
     },
@@ -288,14 +288,14 @@ const FeedPage = () => {
                   {feed.hidden == false ? "나만보기" : "전체공개"}
                 </SubMenuItem>
               </SubMenu>
-              <Question>{feed.question_text}</Question>
+              <Question>{feed.question}</Question>
               <Answer>{feed.content}</Answer>
             </QuestionList>
           ))
         : feeds.map((feed, index) =>
-            feed.hidden ? null : (
+            feeds.hidden ? null : (
               <QuestionList key={index}>
-                <Question>{feed.question_text}</Question>
+                <Question>{feed.question}</Question>
                 <Answer>{feed.content}</Answer>
               </QuestionList>
             )

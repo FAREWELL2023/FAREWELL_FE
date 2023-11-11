@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import img_group from "../images/3dicon/userpage_group.png";
 import key from "../images/3dicon/key.jpg";
@@ -96,6 +96,7 @@ const ContentTxt = styled.div`
 
 const UserPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [username, setUsername] = useState("");
   const keyword1 = localStorage.getItem("keyword1");
   const keyword2 = localStorage.getItem("keyword2");
@@ -175,6 +176,22 @@ const UserPage = () => {
   //     });
   // };
 
+  /* 링크 공유하기 */
+  const handleCopyClipBoard = async (text: string) => {
+    // navigate로 URL 변경
+    navigate(`/user/${username}`);
+
+    // 새로운 URL을 가져와서 복사
+    const newUrl = window.location.href;
+
+    try {
+      await navigator.clipboard.writeText(newUrl);
+      alert("클립보드에 링크가 복사되었어요.");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getUserdata();
   }, []);
@@ -208,13 +225,16 @@ const UserPage = () => {
             <BoxIcon src={comments} />
             <Content
               onClick={() => {
-                navigate(`/user/${username}`); // 남의 회고록 페이지로 이동
+                navigate(`/user/:username/edit`); // 남의 회고록 수정 페이지로 이동
               }}
             >
-              <ContentTitle>내가 쓰는 나의 2023</ContentTitle>
+              <ContentTitle>남이 쓰는 나의 2023</ContentTitle>
               <ContentTxt>친구들의 한마디 보기</ContentTxt>
             </Content>
           </SelectBox>
+          {/*           <div onClick={handleCopyClipBoard}>
+            남이 쓰는 나의 회고록 공유하기
+          </div> */}
         </ContentBox>
       </Wrapper>
     </div>

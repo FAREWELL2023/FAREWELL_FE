@@ -135,7 +135,7 @@ const OthersWritePage = () => {
   /* 답변 보내기 */
   const onClick = (e) => {
     let UserInfo = {
-      question: QInfo.questionNum.toString(),
+      question: QInfo.question,
       /*       question: QInfo.questionNum.toString(), */
       /*       question_text: QInfo.question, */
       content: answer,
@@ -151,13 +151,13 @@ const OthersWritePage = () => {
     axios
       .post("http://127.0.0.1:8000/publicfarewell/", {
         content: answer,
-        question: QInfo.questionNum.toString(),
+        question: QInfo.question,
       })
       .then((response) => {
         console.log("===================");
         console.log("UserInfo 전송");
         console.log(UserInfo);
-        navigate("/user/{username}");
+        navigate("/user/:username/edit");
       })
       .catch((error) => {
         console.log("===================");
@@ -165,6 +165,7 @@ const OthersWritePage = () => {
         console.log(error);
         console.log("UserInfo");
         console.log(UserInfo);
+        navigate("/user/:username/edit");
       });
   };
 
