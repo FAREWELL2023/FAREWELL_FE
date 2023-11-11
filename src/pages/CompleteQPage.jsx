@@ -50,7 +50,7 @@ const SelectBox=styled.div`
     color: black;
     margin-bottom: 3vh;
     margin-left: 9vw;
-    box shadow: 20px 20px grey;
+    //box shadow: 20px 20px grey;
 `
 const BoxIcon=styled.img`
     width:65px;

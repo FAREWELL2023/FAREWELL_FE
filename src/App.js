@@ -27,6 +27,7 @@ import ColdWrite from "./pages/Cold/ColdWrite";
 import RoList from "./pages/Romance/RoList";
 import RoView from "./pages/Romance/RoView";
 import RoWrite from "./pages/Romance/RoWrite";
+import MyEditPage from "./pages/Warm/MyEditPage";
 
 function App() {
   return (
@@ -36,9 +37,10 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/first" element={<FirstPage />} />
 
-        <Route path="/mylist" element={<MyListPage />} />
-        <Route path="/mywrite/:id" element={<MyWritePage />} />
-        <Route path="/myview/:id" element={<MyViewPage />} />
+      <Route path='/mylist' element={<MyListPage/>}/>
+      <Route path='/mywrite/:id' element={<MyWritePage/>}/>
+      <Route path='/myview/:id' element={<MyViewPage/>}/>
+      <Route path="/myedit/:id" element={<MyEditPage/>}/>
 
         <Route path="/hotlist" element={<HotList />} />
         <Route path="/hoview/:id" element={<HotView />} />
