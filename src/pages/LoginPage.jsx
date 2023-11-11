@@ -8,7 +8,7 @@ import logo_2023_black from "../images/logo_2023_black.svg";
 import logo_black from "../images/logo_black.svg";
 import checkbutton from "../images/3dicon/checkbutton.png";
 
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
 
 const Wrapper = styled.div`
   background-color: #efec69;
@@ -61,8 +61,7 @@ function LoginPage(props) {
   /* 로딩 메시지 */
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState("");
-  const [cookies, setCookie] = useCookies(['access', 'refresh']); // 'your_token_cookie'는 쿠키 이름
-
+  const [cookies, setCookie] = useCookies(["access", "refresh"]); // 'your_token_cookie'는 쿠키 이름
 
   const onChangeEmail = (event) => {
     const currentEmail = event.target.value;
@@ -97,8 +96,8 @@ function LoginPage(props) {
       .then((res) => {
         console.log(res);
 
-        localStorage.setItem('keyword1', res.data.keywords[0]);
-        localStorage.setItem('keyword2', res.data.keywords[1]);
+        localStorage.setItem("keyword1", res.data.keywords[0]);
+        localStorage.setItem("keyword2", res.data.keywords[1]);
 
         if (res.data.user.email === undefined) {
           console.log("=================", res.data.message);
@@ -114,8 +113,8 @@ function LoginPage(props) {
 
           // 토큰 값을 쿠키에 저장
           const token = res.data.token;
-          setCookie('access', token.access, { path: '/' });
-          setCookie('refresh', token.refresh, { path: '/' });
+          setCookie("access", token.access, { path: "/" });
+          setCookie("refresh", token.refresh, { path: "/" });
 
           sessionStorage.setItem("email", UserInfo.email);
         }
