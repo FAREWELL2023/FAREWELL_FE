@@ -22,23 +22,23 @@ import FeedPage from "./pages/FeedPage";
 function App() {
   return (
     <>
-    <GlobalStyle />
-    <Routes>
-      <Route path='/' element={<LandingPage />}/>
-      <Route path='/first' element={<FirstPage />}/>
-      <Route path='/mylist/:theme' element={<MyListPage/>}/>
-      <Route path='/mywrite/:themeid/:id' element={<MyWritePage/>}/>
-      <Route path='/myview/:themeid/:id' element={<MyViewPage/>}/>
-      <Route path="/accounts/register" element={<RegisterPage />} />
-      <Route path="/accounts/auth" element={<LoginPage />} />
-      <Route path="/endingopen" element={<EndingOpenPage/>} />
-      <Route path="/endingrate" element={<AnswerRatePage/>}/>
-      <Route path="/myending" element={<MyEndingPage/>}/>
-      <Route path="/thanku" element={<ThxPage/>}/>
+      <GlobalStyle />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/first" element={<FirstPage />} />
+        <Route path="/mylist/:theme" element={<MyListPage />} />
+        <Route path="/mywrite/:themeid/:id" element={<MyWritePage />} />
+        <Route path="/myview/:themeid/:id" element={<MyViewPage />} />
+        <Route path="/accounts/register" element={<RegisterPage />} />
+        <Route path="/accounts/login" element={<LoginPage />} />
+        <Route path="/endingopen" element={<EndingOpenPage />} />
+        <Route path="/endingrate" element={<AnswerRatePage />} />
+        <Route path="/myending" element={<MyEndingPage />} />
+        <Route path="/thanku" element={<ThxPage />} />
         <Route path="/user" element={<UserPage />} />
         <Route path="/complete" element={<CompleteQPage />} />
         <Route path="/list" element={<ThemePage />} />
-        <Route path="/publicfarewell" element={<FeedPage />} />
+        <Route path="/user/:username" element={<FeedPage />} />
         <Route
           path="/publicfarewell/questions"
           element={<OthersQuestionPage />}

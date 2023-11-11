@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -53,6 +53,7 @@ const QuestionList = styled.div`
 `;
 
 const OthersQuestionPage = () => {
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
   const questionlist = [
@@ -66,9 +67,10 @@ const OthersQuestionPage = () => {
     { question: 8, content: "Q. 2023을 마무리하며 이 사람에게 한 마디" },
   ];
 
+  /* 질문 받아오는 리스트 */
   const Qlist = () => {
     axios
-      .get("http://13.125.156.150/publicfarewell/")
+      .get("http://localhost:8000/publicfarewell/")
       .then((response) => {
         const QList = response.data;
         console.log(QList);
@@ -78,11 +80,34 @@ const OthersQuestionPage = () => {
       });
   };
 
+  /* 사용자 이름 받아오기 */
+  const getUserdata = () => {
+    axios
+      .get("http://localhost:8000/accounts/auth/", {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response.data);
+        setUsername(response.data.user.username);
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 401) {
+          console.error("Error fetching cards: ", error);
+        } else {
+          console.error("Error fetching cards: ", error);
+        }
+      });
+  };
+
   const onClick = (item) => {
     navigate(`/publicfarewell/write/${item.question}`, {
-      state: { question: item.content },
+      state: { questionNum: item.question, question: item.content },
     });
   };
+
+  useEffect(() => {
+    getUserdata();
+  }, []);
 
   return (
     <Wrapper>
@@ -90,9 +115,9 @@ const OthersQuestionPage = () => {
         <img src={tree} style={{ width: "22vw", height: "17vh" }} />
       </Logo>
       <img src={logo} style={{ display: "flex", padding: "5vh 0 0 7vw" }} />
-      <TitleTxt1 onClick={Qlist}>name님에게 한마디</TitleTxt1>
+      <TitleTxt1>{username}님에게 한마디</TitleTxt1>
       <Title>질문 선택하기</Title>
-      <TitleTxt2>질문에 답변하여 name님의 회고록을 채워주세요.</TitleTxt2>
+      <TitleTxt2>질문에 답변하여 {username}님의 회고록을 채워주세요.</TitleTxt2>
       {questionlist.map((item) => (
         <QuestionList key={item.question} onClick={() => onClick(item)}>
           {item.content}

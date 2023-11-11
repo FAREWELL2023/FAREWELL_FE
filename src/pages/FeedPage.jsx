@@ -109,7 +109,7 @@ const FeedPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [userName, setUserName] = useState("");
+  const [username, setUsername] = useState("");
   const [feeds, setFeeds] = useState([]);
   const [editedFeeds, setEditedFeeds] = useState([]);
   const [subMenuVisibility, setSubMenuVisibility] = useState([]);
@@ -118,18 +118,31 @@ const FeedPage = () => {
   const [questionlist, setQuestionList] = useState([
     {
       number: 1,
-      question: "Q. 올해 이 사람에게 가장 고마웠던 일은?",
-      answer: "히히",
+      question_text: "Q. 올해 이 사람에게 가장 고마웠던 일은?",
+      content: "프론트 세션 이해가 잘 안 될 때 도와줬다! ",
       hidden: false,
     },
   ]);
 
+  /* 사용자 이름 받아 오기  */
+  const getUserdata = () => {
+    axios
+      .get("http://localhost:8000/accounts/auth/", {
+        withCredentials: true,
+      })
+      .then((response) => {
+        setUsername(response.data.user.username);
+      })
+      .catch((error) => {
+        console.error("Error Getting Name: ", error);
+      });
+  };
+
+  /* 유저 정보 받아오는 기능 */
   const isLogin = () => {
     axios
-      .get("http://13.125.156.150/publicfarewell/")
+      .get("http://localhost:8000/publicfarewell/")
       .then((response) => {
-        const userData = response.data;
-        console.log(userData);
         /*         if (userData.is_active) {
           console.log("User is active:", userData);
           setUserLoggedIn(userData.is_active);
@@ -142,16 +155,7 @@ const FeedPage = () => {
       });
   };
 
-  const onClickWrite = () => {
-    navigate(`/publicfarewell/questions`);
-  };
-
-  const toggleSubMenu = (index) => {
-    const updatedSubMenuVisibility = [...subMenuVisibility];
-    updatedSubMenuVisibility[index] = !updatedSubMenuVisibility[index];
-    setSubMenuVisibility(updatedSubMenuVisibility);
-  };
-
+  /* 링크 공유하기 */
   const handleCopyClipBoard = async (text: string) => {
     console.log(location);
     try {
@@ -162,6 +166,31 @@ const FeedPage = () => {
     }
   };
 
+  /* 글쓰기 */
+  const onClickWrite = () => {
+    navigate(`/publicfarewell/questions`);
+  };
+
+  /* 삭제/숨기기 설정 토글 */
+  const toggleSubMenu = (index) => {
+    const updatedSubMenuVisibility = [...subMenuVisibility];
+    updatedSubMenuVisibility[index] = !updatedSubMenuVisibility[index];
+    setSubMenuVisibility(updatedSubMenuVisibility);
+  };
+
+  /* 삭제하기 */
+  const deleteFeed = (id) => {
+    axios
+      .delete("http://127.0.0.1:8000/publicfarewell/")
+      .then((response) => {
+        fetchFeeds();
+      })
+      .catch((error) => {
+        console.error("Error deleting feed: ", error);
+      });
+  };
+
+  /* 숨기기 */
   const hideItem = (index) => {
     const updatedList = [...questionlist];
     //console.log("1: ", updatedList[index].hidden);
@@ -175,68 +204,63 @@ const FeedPage = () => {
     setQuestionList(updatedList);
   };
 
-  useEffect(() => {
-    axios
-      .get("http://13.125.156.150/publicfarewell/")
-      .then((response) => {
-        const userData = response.data;
-        console.log(userData);
-        /*         if (userData.is_active) {
-        console.log("User is active:", userData);
-        setUserLoggedIn(userData.is_active);
-      } else {
-        console.log("User is not active.");
-      } */
-      })
-      .catch((error) => {
-        console.error("Error fetching user data:", error);
-      });
-    // fecthFeeds();
-    // SubMenu visible 여부 false로 초기화
-    const initialSubMenuVisibility = new Array(feeds.length).fill("false"); //'false'로 안 하면 boolean값 에러 뜸
-    setSubMenuVisibility(initialSubMenuVisibility);
-  }, [feeds]);
-
   const fetchFeeds = () => {
     axios
-      .get("http://13.125.156.150/publicfarewell/")
+      .get("http://127.0.0.1:8000/publicfarewell/")
       .then((response) => {
-        setFeeds(response.data);
-        const intialEditedFeeds = {};
+        console.log(response.data.results);
+        console.log("메롱1");
+        setFeeds(response.data.results);
+        /*         const intialEditedFeeds = {};
         response.data.forEach((feed) => {
           intialEditedFeeds[feed.id] = {
-            title: feed.question,
-            content: feed.answer,
+            title: feed.question_text,
+            content: feed.content,
           };
         });
-        setEditedFeeds(intialEditedFeeds);
+        setEditedFeeds(intialEditedFeeds); */
       })
       .catch((error) => {
         console.error("Error fetching feeds: ", error);
       });
   };
 
-  const userInfo = () => {
+  /*   useEffect(() => {
+    getUserdata();
     axios
-      .get("http://13.125.156.150/accounts/auth/")
+      .get("http://127.0.0.1:8000/publicfarewell/")
       .then((response) => {
-        const userName = response.data.user.username;
+        const userData = response.data;
+        console.log(userData);
+        console.log("메롱2");
       })
       .catch((error) => {
-        console.error("Error Getting Name: ", error);
+        console.error("Error fetching user data:", error);
+      });
+    fetchFeeds();
+    // SubMenu visible 여부 false로 초기화
+    const initialSubMenuVisibility = new Array(feeds.length).fill("false"); //'false'로 안 하면 boolean값 에러 뜸
+    setSubMenuVisibility(initialSubMenuVisibility);
+  }, [feeds]); */
+
+  const getFeeds = () => {
+    axios
+      .get("http://127.0.0.1:8000/publicfarewell/")
+      .then((response) => {
+        console.log("get Feeds");
+        console.log(response.data);
+        console.log(response.data.results);
+        setFeeds(response.data.results);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
-  const deleteFeed = (id) => {
-    axios
-      .delete("http://13.125.156.150/publicfarewell/")
-      .then((response) => {
-        fetchFeeds();
-      })
-      .catch((error) => {
-        console.error("Error deleting feed: ", error);
-      });
-  };
+  useEffect(() => {
+    getUserdata();
+    getFeeds();
+  });
 
   return (
     <Wrapper>
@@ -251,7 +275,7 @@ const FeedPage = () => {
           handleCopyClipBoard(`http://localhost:3000${location.pathname}`)
         }
       />
-      <Title>{userName}님에게 한마디</Title>
+      <Title>{username}님에게 한마디</Title>
       {userLoggedIn
         ? questionlist.map(
             (feed, index /* ? feeds.map((feed, index) => ( */) => (
@@ -264,16 +288,16 @@ const FeedPage = () => {
                     {feed.hidden == false ? "나만보기" : "전체공개"}
                   </SubMenuItem>
                 </SubMenu>
-                <Question>{feed.question}</Question>
-                <Answer>{feed.answer}</Answer>
+                <Question>{feed.question_text}</Question>
+                <Answer>{feed.content}</Answer>
               </QuestionList>
             )
           )
         : questionlist.map((feed, index) =>
             feed.hidden ? null : (
               <QuestionList key={index}>
-                <Question>{feed.question}</Question>
-                <Answer>{feed.answer}</Answer>
+                <Question>{feed.question_text}</Question>
+                <Answer>{feed.content}</Answer>
               </QuestionList>
             )
           )}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -76,32 +76,86 @@ const SubmitButton = styled.button`
 
 const OthersWritePage = () => {
   const location = useLocation();
+  const [username, setUsername] = useState("");
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const QInfo = location.state;
   const navigate = useNavigate();
 
+  /* 이름 얻기 */
+  const getUserdata = () => {
+    axios
+      .get("http://localhost:8000/accounts/auth/", {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response.data);
+        setUsername(response.data.user.username);
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 401) {
+          console.error("Error fetching cards: ", error);
+        } else {
+          console.error("Error fetching cards: ", error);
+        }
+      });
+  };
+
+  /* 답변 저장 */
   const onChangeAnswer = (e) => {
     const answer = e.target.value;
     setAnswer(answer);
   };
 
+  const onCheck = (e) => {
+    let UserInfo = {
+      question: QInfo.questionNum,
+      question_text: QInfo.question,
+      content: answer,
+    };
+
+    console.log("QInfo");
+    console.log(QInfo);
+  };
+
+  /*   answer 체크하고 보내기 각각 기능 
+  const sendAnswer = () => {
+    axios
+      .get("http://localhost:8000/publicfarewell/")
+      .then((response) => {
+        const QList = response.data;
+        console.log(QList);
+      })
+      .catch((error) => {
+        console.error("Sending Answer Error:", error);
+      });
+  };
+ */
+
+  /* 답변 보내기 */
   const onClick = (e) => {
     let UserInfo = {
-      name: null,
-      question: QInfo.question,
+      question: QInfo.questionNum,
+      question_text: QInfo.question,
       content: answer,
     };
 
     axios
-      .post("http://localhost:8000/publicfarewell/")
+      .post("http://localhost:8000/publicfarewell/", UserInfo)
       .then((response) => {
-        navigate("/publicfarewell");
-        console.log("Question: ", QInfo.content);
-        console.log("Answer: ", answer);
+        console.log(UserInfo);
+        navigate("/user/{username}");
+        /*         navigate("/user/:username"); */
       })
-      .catch((error) => {});
+      .catch((error) => {
+        console.log(UserInfo);
+        console.log("UserInfo 에러");
+      });
   };
+
+  useEffect(() => {
+    getUserdata();
+  }, []);
 
   return (
     <Wrapper>
@@ -109,9 +163,9 @@ const OthersWritePage = () => {
         <img src={christmastree} style={{ width: "42vw", height: "16vh" }} />
       </Logo>
       <img src={logo} style={{ display: "flex", padding: "5vh 0 0 7vw" }} />
-      <TitleTxt1>name님에게 한마디</TitleTxt1>
+      <TitleTxt1 onClick={onCheck}>{username}님에게 한마디</TitleTxt1>
       <Title>질문 작성하기</Title>
-      <TitleTxt2>질문에 답변하여 name님의 회고록을 채워주세요.</TitleTxt2>
+      <TitleTxt2>질문에 답변하여 {username}님의 회고록을 채워주세요.</TitleTxt2>
       <QuestionList>{QInfo.question}</QuestionList>
       <QuestionAnswer>
         <textarea
