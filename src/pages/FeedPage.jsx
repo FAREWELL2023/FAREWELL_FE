@@ -247,6 +247,7 @@ const FeedPage = () => {
     axios
       .get("http://127.0.0.1:8000/publicfarewell/")
       .then((response) => {
+        console.log("===============");
         console.log("get Feeds");
         console.log(response.data);
         console.log(response.data.results);
@@ -260,7 +261,7 @@ const FeedPage = () => {
   useEffect(() => {
     getUserdata();
     getFeeds();
-  });
+  }, []);
 
   return (
     <Wrapper>

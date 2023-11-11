@@ -29,7 +29,7 @@ const Percent = styled.div`
   text-align: center;
   font-weight: 700;
   font-size: 3.4rem;
-  margin-top: 20vh;
+  margin-top: 5vh;
 `;
 const Txt = styled.div`
   color: #efec69;
