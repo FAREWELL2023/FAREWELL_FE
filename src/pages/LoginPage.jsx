@@ -118,6 +118,7 @@ function LoginPage(props) {
 
           sessionStorage.setItem("email", UserInfo.email);
         }
+        console.log(UserInfo);
         navigate(`/user`);
       })
       .catch((err) => {

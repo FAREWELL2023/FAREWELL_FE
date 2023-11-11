@@ -113,7 +113,6 @@ const FeedPage = () => {
   const [feeds, setFeeds] = useState([]);
   const [editedFeeds, setEditedFeeds] = useState([]);
   const [subMenuVisibility, setSubMenuVisibility] = useState([]);
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [showImage, setShowImage] = useState(false);
   const [questionlist, setQuestionList] = useState([
     {
@@ -277,30 +276,20 @@ const FeedPage = () => {
         }
       />
       <Title>{username}님에게 한마디</Title>
-      {userLoggedIn
-        ? feeds.map((feed, index /* ? feeds.map((feed, index) => ( */) => (
-            <QuestionList key={index}>
-              <Menu src={menu} onClick={() => toggleSubMenu(index)} />
-              {feed.showImage && <Lock src={hidden} />}
-              <SubMenu visible={subMenuVisibility[index]}>
-                <SubMenuItem onClick={deleteFeed}>삭제하기</SubMenuItem>
-                <SubMenuItem onClick={() => hideItem(index)}>
-                  {feed.hidden == false ? "나만보기" : "전체공개"}
-                </SubMenuItem>
-              </SubMenu>
-              <Question>{feed.question_text}</Question>
-              <Answer>{feed.content}</Answer>
-            </QuestionList>
-          ))
-        : feeds.map((feed, index) =>
-            feed.hidden ? null : (
-              <QuestionList key={index}>
-                <Question>{feed.question_text}</Question>
-                <Answer>{feed.content}</Answer>
-              </QuestionList>
-            )
-          )}
-
+      questionlist.map( (feed, index ) => (
+      <QuestionList key={index}>
+        <Menu src={menu} onClick={() => toggleSubMenu(index)} />
+        {feed.showImage && <Lock src={hidden} />}
+        <SubMenu visible={subMenuVisibility[index]}>
+          <SubMenuItem onClick={deleteFeed}>삭제하기</SubMenuItem>
+          <SubMenuItem onClick={() => hideItem(index)}>
+            {feed.hidden == false ? "나만보기" : "전체공개"}
+          </SubMenuItem>
+        </SubMenu>
+        <Question>{feed.question_text}</Question>
+        <Answer>{feed.content}</Answer>
+      </QuestionList>
+      )
       <SubmitButton onClick={onClickWrite}>
         <img src={write} style={{ width: "28vw", height: "10vh" }} />
       </SubmitButton>

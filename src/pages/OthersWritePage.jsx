@@ -135,21 +135,36 @@ const OthersWritePage = () => {
   /* 답변 보내기 */
   const onClick = (e) => {
     let UserInfo = {
-      question: QInfo.questionNum,
-      question_text: QInfo.question,
+      question: QInfo.questionNum.toString(),
+      /*       question: QInfo.questionNum.toString(), */
+      /*       question_text: QInfo.question, */
       content: answer,
     };
 
+    /*    axios({
+      url: `http://127.0.0.1:8000/publicfarewell`,
+      method: "post",
+      body: {
+        UserInfo,
+      },
+    }) */
     axios
-      .post("http://localhost:8000/publicfarewell/", UserInfo)
+      .post("http://127.0.0.1:8000/publicfarewell/", {
+        content: answer,
+        question: QInfo.questionNum.toString(),
+      })
       .then((response) => {
+        console.log("===================");
+        console.log("UserInfo 전송");
         console.log(UserInfo);
         navigate("/user/{username}");
-        /*         navigate("/user/:username"); */
       })
       .catch((error) => {
-        console.log(UserInfo);
+        console.log("===================");
         console.log("UserInfo 에러");
+        console.log(error);
+        console.log("UserInfo");
+        console.log(UserInfo);
       });
   };
 
