@@ -63,7 +63,7 @@ const OthersQuestionPage = () => {
     { question: 4, content: "Q. 올해 이 사람이 가장 웃겼던 순간은?" },
     { question: 5, content: "Q. 올해 이 사람과 함께한 행복했던 순간은?" },
     { question: 6, content: "Q. 올해 이 사람과 함께한 잊을 수 없던 순간" },
-    { question: 7, content: "Q. 올해 이 사람에게 하고싶었지만 못 했던 말" },
+    { question: 7, content: "Q. 올해 이 사람에게 하고 싶었지만 못 했던 말" },
     { question: 8, content: "Q. 2023을 마무리하며 이 사람에게 한 마디" },
   ];
 

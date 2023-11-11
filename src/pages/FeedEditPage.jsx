@@ -19,13 +19,21 @@ const Wrapper = styled.div`
 `;
 
 const Logo = styled.div`
-  position: absolute;
+  position: relative;
   right: 30px;
 `;
-const Share = styled.img`
-  position: absolute;
+
+const Bell = styled.div`
   display: flex;
-  padding: 3vh 0 0 82vw;
+  padding: 0vh 0 0 5vw;
+  position: absolute;
+  right: -10px;
+`;
+
+const Share = styled.img`
+  position: relative;
+  display: flex;
+  padding: 3vh 10vw 0 80vw;
   width: 7vw;
   height: 3vh;
   float: right;
@@ -105,7 +113,7 @@ const SubMenuItem = styled.div`
   }
 `;
 
-const FeedPage = () => {
+const FeedEditPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -113,13 +121,67 @@ const FeedPage = () => {
   const [feeds, setFeeds] = useState([]);
   const [editedFeeds, setEditedFeeds] = useState([]);
   const [subMenuVisibility, setSubMenuVisibility] = useState([]);
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const [userLoggedIn, setUserLoggedIn] = useState(true);
   const [showImage, setShowImage] = useState(false);
   const [questionlist, setQuestionList] = useState([
     {
       number: 1,
       name: "Q. 올해 이 사람에게 가장 고마웠던 일은?",
-      content: "프론트 세션 이해가 잘 안 될 때 도와줬다! ",
+      content: "멋사 세션 때 이해가 잘 안 되는 부분을 알려줬다!",
+      hidden: false,
+    },
+    {
+      number: 1,
+      name: "Q. 올해 이 사람에게 가장 고마웠던 일은?",
+      content: "뒷풀이 끝나고 데리러 와줬을 때...",
+      hidden: false,
+    },
+    {
+      number: 2,
+      name: "Q. 올해 이 사람에게 가장 미안했던 일은?",
+      content: "아이스크림 사주마자 쏟은 거 ㅜㅜ 미안해! ",
+      hidden: false,
+    },
+    {
+      number: 3,
+      name: "Q. 올해 이 사람이 가장 빛났던 순간은?",
+      content: "4호선톤에서 발표할 때! >< ",
+      hidden: false,
+    },
+    {
+      number: 4,
+      name: "Q. 올해 이 사람이 가장 웃겼던 순간은?",
+      content: "뒷풀이 끝나고 집 가는 길에 넘어졌을 때  ",
+      hidden: false,
+    },
+    {
+      number: 5,
+      name: "Q. 올해 이 사람과 함께한 행복했던 순간은?",
+      content: "4호선톤 수상!!!",
+      hidden: false,
+    },
+    {
+      number: 6,
+      name: "Q. 올해 이 사람과 함께한 잊을 수 없던 순간",
+      content: "4호선톤 수상했던 순간!!!",
+      hidden: false,
+    },
+    {
+      number: 6,
+      name: "Q. 올해 이 사람과 함께한 잊을 수 없던 순간",
+      content: "같이 여행 갔던 뜨거운 여름!",
+      hidden: false,
+    },
+    {
+      number: 7,
+      name: "Q. 올해 이 사람에게 하고 싶었지만 못 했던 말",
+      content: "4호선톤 수상했던 순간!!!",
+      hidden: false,
+    },
+    {
+      number: 8,
+      name: "Q. 2023을 마무리하며 이 사람에게 한 마디",
+      content: "함께여서 행복했고 2024년도 행복하자!",
       hidden: false,
     },
   ]);
@@ -181,12 +243,27 @@ const FeedPage = () => {
   /* 삭제하기 */
   const deleteFeed = (id) => {
     axios
-      .delete("http://127.0.0.1:8000/publicfarewell/")
+      .delete(`http://127.0.0.1:8000/publicfarewell/${id}/`)
       .then((response) => {
         fetchFeeds();
       })
       .catch((error) => {
         console.error("Error deleting feed: ", error);
+        if (error.response) {
+          // The request was made, but the server responded with a status code
+          // that falls out of the range of 2xx
+          console.error(
+            "Server responded with status code:",
+            error.response.status
+          );
+          console.error("Server response data:", error.response.data);
+        } else if (error.request) {
+          // The request was made, but no response was received
+          console.error("No response received from the server");
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.error("Error setting up the request:", error.message);
+        }
       });
   };
 
@@ -266,14 +343,16 @@ const FeedPage = () => {
   return (
     <Wrapper>
       <Logo>
-        <img src={bell} style={{ width: "30vw", height: "11vh" }} />
+        <Bell>
+          <img src={bell} style={{ width: "30vw", height: "11vh" }} />
+        </Bell>
       </Logo>
       <img src={logo} style={{ display: "flex", padding: "5vh 0 0 7vw" }} />
       {/*             <Share src={share} onClick={() => handleCopyClipBoard(`${baseUrl}${location.pathname}`)}/> */}
       <Share
         src={share}
         onClick={() =>
-          handleCopyClipBoard(`http://localhost:3000${location.pathname}`)
+          handleCopyClipBoard(`http://localhost:8000${location.pathname}`)
         }
       />
       <Title>{username}님에게 한마디</Title>
@@ -285,7 +364,8 @@ const FeedPage = () => {
               <SubMenu visible={subMenuVisibility[index]}>
                 <SubMenuItem onClick={deleteFeed}>삭제하기</SubMenuItem>
                 <SubMenuItem onClick={() => hideItem(index)}>
-                  {feed.hidden == false ? "나만보기" : "전체공개"}
+                  {/*     hidden 속성이 없어서 임시로 바꿔둠              {feed.hidden == false ? "나만보기" : "전체공개"} */}
+                  {feed.hidden == false ? "전체공개" : "나만보기"}
                 </SubMenuItem>
               </SubMenu>
               <Question>{feed.question}</Question>
@@ -293,7 +373,7 @@ const FeedPage = () => {
             </QuestionList>
           ))
         : feeds.map((feed, index) =>
-            feeds.hidden ? null : (
+            feed.hidden ? null : (
               <QuestionList key={index}>
                 <Question>{feed.question}</Question>
                 <Answer>{feed.content}</Answer>
@@ -308,4 +388,4 @@ const FeedPage = () => {
   );
 };
 
-export default FeedPage;
+export default FeedEditPage;

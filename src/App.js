@@ -28,42 +28,44 @@ import RoList from "./pages/Romance/RoList";
 import RoView from "./pages/Romance/RoView";
 import RoWrite from "./pages/Romance/RoWrite";
 import MyEditPage from "./pages/Warm/MyEditPage";
+import FeedEditPage from "./pages/FeedEditPage";
 
 function App() {
   return (
     <>
-    <GlobalStyle />
-    <Routes>
-      <Route path='/' element={<LandingPage />}/>
-      <Route path='/first' element={<FirstPage />}/>
+      <GlobalStyle />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/first" element={<FirstPage />} />
 
-      <Route path='/mylist' element={<MyListPage/>}/>
-      <Route path='/mywrite/:id' element={<MyWritePage/>}/>
-      <Route path='/myview/:id' element={<MyViewPage/>}/>
-      <Route path="/myedit/:id" element={<MyEditPage/>}/>
+        <Route path="/mylist" element={<MyListPage />} />
+        <Route path="/mywrite/:id" element={<MyWritePage />} />
+        <Route path="/myview/:id" element={<MyViewPage />} />
+        <Route path="/myedit/:id" element={<MyEditPage />} />
 
-      <Route path="/hotlist" element={<HotList/>}/>
-      <Route path="/hoview/:id" element={<HotView/>}/>
-      <Route path="/hotwrite/:id" element={<HotWrite/>}/>
+        <Route path="/hotlist" element={<HotList />} />
+        <Route path="/hoview/:id" element={<HotView />} />
+        <Route path="/hotwrite/:id" element={<HotWrite />} />
 
-      <Route path="/coldlist" element={<ColdList/>}/>
-      <Route path="/coldview/:id" element={<ColdView/>}/>
-      <Route path="/coldwrite/:id" element={<ColdWrite/>}/>
+        <Route path="/coldlist" element={<ColdList />} />
+        <Route path="/coldview/:id" element={<ColdView />} />
+        <Route path="/coldwrite/:id" element={<ColdWrite />} />
 
-      <Route path="/rolist" element={<RoList/>}/>
-      <Route path="/roview/:id" element={<RoView/>}/>
-      <Route path="/rowrite/:id" element={<RoWrite/>}/>
+        <Route path="/rolist" element={<RoList />} />
+        <Route path="/roview/:id" element={<RoView />} />
+        <Route path="/rowrite/:id" element={<RoWrite />} />
 
-      <Route path="/accounts/signup" element={<RegisterPage />} />
-      <Route path="/accounts/login" element={<LoginPage />} />
-      <Route path="/endingopen" element={<EndingOpenPage/>} />
-      <Route path="/endingrate" element={<AnswerRatePage/>}/>
-      <Route path="/myending" element={<MyEndingPage/>}/>
-      <Route path="/thanku" element={<ThxPage/>}/>
+        <Route path="/accounts/signup" element={<RegisterPage />} />
+        <Route path="/accounts/login" element={<LoginPage />} />
+        <Route path="/endingopen" element={<EndingOpenPage />} />
+        <Route path="/endingrate" element={<AnswerRatePage />} />
+        <Route path="/myending" element={<MyEndingPage />} />
+        <Route path="/thanku" element={<ThxPage />} />
         <Route path="/user" element={<UserPage />} />
         <Route path="/complete" element={<CompleteQPage />} />
         <Route path="/list" element={<ThemePage />} />
         <Route path="/user/:username" element={<FeedPage />} />
+        <Route path="/user/:username/edit" element={<FeedEditPage />} />
         <Route
           path="/publicfarewell/questions"
           element={<OthersQuestionPage />}
