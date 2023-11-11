@@ -33,13 +33,12 @@ const Line = styled.div`
 `
 
 const MyQList = (props) => {
-    const { number, question, isanswer, answer, themeid, onClick } = props;
+    const { number, question, isanswer, answer, theme, onClick } = props;
     const navigate = useNavigate();
-    console.log(answer);
 
     return (
         <List onClick={() => {
-            isanswer? navigate(`/myview/${themeid}/${number}`, {state :{number: number, question: question, answer: answer}}) : navigate(`/mywrite/${number}`, {state :{number: number, question: question, answer: answer}}) // 답변이 있으면 /write으로, 없으면 /으로
+            isanswer ? navigate(`/${theme}view/${number}`, {state :{number: number, question: question, answer: answer}}) : navigate(`/${theme}write/${number}`, {state :{number: number, question: question, answer: answer}}) // 답변이 있으면 /write으로, 없으면 /으로
         }}>
             {number > 1 && <Line style={isanswer? {borderLeft: "medium solid white"} : {}}/>}
             <div style={{display:"flex", justifyContent:"space-between"}}>
