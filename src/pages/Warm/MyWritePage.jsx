@@ -73,7 +73,8 @@ const StyledButton = styled.div`
 const MyWritePage = () => {
     const location = useLocation();
     const QInfo = { ...location.state }; // 해당 질문의 번호,질문내용을 받아옴
-    const navigate = useNavigate(); console.log(QInfo);
+    const navigate = useNavigate(); 
+    console.log(QInfo.isanswer);
     const [answer, setAnswer] = useState(QInfo.answer);
     const [username, setUsername] = useState("");
 
@@ -111,9 +112,19 @@ const MyWritePage = () => {
         })
     };
 
+    // const eidtAnswer = () => {
+    //     axios.patch(`http://localhost:8000/myfarewell/${QInfo.number}/`, {
+    //         answer: answer
+    //     })
+    //     .then(res => {
+    //         console.log("수정", res);
+    //         navigate(`/myview/${QInfo.num}`);
+    //     })
+    // };
+
     useEffect(() => {
         getUserdata();
-    })
+    });
 
     const onChangeAnswer = (e) => {
         const answer = e.target.value;
